@@ -130,13 +130,13 @@ payBtn.addEventListener('click', () => {
                             caseId,
                             uploaderId: userId,
                             category: 'agreement',
-                            fileName: '최종합의서_' + new Date().toLocaleDateString().replace(/\./g, '') + '_signed.png',
+                            fileName: '최종조율 확인서_' + new Date().toLocaleDateString().replace(/\./g, '') + '_signed.png',
                             fileType: 'image/png',
                             fileData: fileData
                         })
                     });
 
-                    alert("✅ 최종 합의서(서명본)가 안전하게 저장되었습니다.\n서류 공유함에서 확인 가능합니다.");
+                    alert("✅ 최종 조율 확인서(서명본)가 안전하게 저장되었습니다.\n서류 공유함에서 확인 가능합니다.");
                 }
 
             } catch (e) {

@@ -1,20 +1,20 @@
 :root {
     /* Colors */
-    --primary: hsl(230, 85%, 60%);
-    --primary-hover: hsl(230, 85%, 50%);
-    --secondary: hsl(170, 80%, 50%);
-    --accent: hsl(330, 80%, 60%);
+    --primary: hsl(35, 100%, 55%); /* Orange */
+    --primary-hover: hsl(35, 100%, 45%);
+    --secondary: hsl(50, 100%, 50%); /* Yellow */
+    --accent: hsl(140, 70%, 50%); /* Green */
 
-    --bg-dark: hsl(220, 30%, 8%);
-    --bg-card: hsla(220, 30%, 14%, 0.6);
-    --bg-glass: hsla(220, 30%, 14%, 0.4);
+    --bg-dark: hsl(30, 15%, 10%); /* Warm dark background */
+    --bg-card: hsla(30, 15%, 16%, 0.6);
+    --bg-glass: hsla(30, 15%, 16%, 0.4);
 
     --text-main: hsl(0, 0%, 100%);
-    --text-muted: hsla(220, 20%, 80%, 0.8);
+    --text-muted: hsla(30, 20%, 80%, 0.8);
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
-    --gradient-logo: linear-gradient(135deg, #4ade80, #3b82f6);
+    --gradient-logo: linear-gradient(135deg, #ff9a44, #fc6076);
     --gradient-glow: radial-gradient(circle at center, var(--primary), transparent 70%);
 
     /* Spacing */
@@ -211,7 +211,7 @@ header .container {
     padding-right: 0px;
     display: block;
     /* Adjust proximity to seam */
-    /* To visually pull '세이프' bit left if needed? No, right align pulls it to seam. */
+    /* To visually pull '해피' bit left if needed? No, right align pulls it to seam. */
 }
 
 .logo-kr-right {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>합의서 작성 및 결제 - SafeHappE</title>
+    <title>조율 확인서 작성 및 결제 - HappyHappE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="agreement.css">
     <link
@@ -21,16 +21,16 @@
         <!-- Mobile Bottom Nav -->
         <nav class="mobile-bottom-nav">
             <div class="nav-item" onclick="location.href='dashboard.html?page=cases'">
-                <i class="fas fa-th-large"></i><span>사건 목록</span>
+                <i class="fas fa-th-large"></i><span>안건 목록</span>
             </div>
             <div class="nav-item" onclick="location.href='case_detail.html'">
-                <i class="fas fa-chart-pie"></i><span>사건 현황</span>
+                <i class="fas fa-chart-pie"></i><span>안건 현황</span>
             </div>
             <div class="nav-item" onclick="location.href='case_detail.html'">
-                <i class="fas fa-hand-holding-usd"></i><span>합의금 제안</span>
+                <i class="fas fa-hand-holding-usd"></i><span>조율 제안</span>
             </div>
             <div class="nav-item" onclick="toggleMobileSidebar()">
-                <i class="fas fa-bars"></i><span>더보기</span>
+                <i class="fas fa-bars"></i><span>전체보기</span>
             </div>
         </nav>
 
@@ -42,16 +42,16 @@
             </div>
             <a href="index.html" class="logo">
                 <div class="logo-grid">
-                    <span class="logo-row-en logo-en-left">Safe</span>
+                    <span class="logo-row-en logo-en-left">Happy</span>
                     <span class="logo-row-en logo-en-right">HappE.</span>
-                    <span class="logo-row-kr logo-kr-left">세이프</span>
+                    <span class="logo-row-kr logo-kr-left">해피</span>
                     <span class="logo-row-kr logo-kr-right">합의</span>
                 </div>
             </a>
             <nav class="nav-links">
                 <div class="nav-item" onclick="location.href='dashboard.html?page=cases'">
                     <i class="fas fa-folder-open"></i>
-                    <span>내 사건 목록</span>
+                    <span>나의 안건 목록</span>
                 </div>
                 <div class="nav-item">
                     <i class="fas fa-comments"></i>
@@ -59,11 +59,11 @@
                 </div>
                 <div class="nav-item active">
                     <i class="fas fa-file-signature"></i>
-                    <span>합의서 관리</span>
+                    <span>조율 확인서</span>
                 </div>
                 <div class="nav-item">
                     <i class="fas fa-gavel"></i>
-                    <span>변호사 중재</span>
+                    <span>전문가 중재</span>
                 </div>
                 <div style="flex: 1;"></div>
                 <div class="nav-item">
@@ -77,8 +77,8 @@
         <main class="main-content">
             <div class="top-bar">
                 <div>
-                    <h2 style="margin-bottom: 5px;">합의서 작성 및 결제</h2>
-                    <p style="color: var(--text-muted);">최종 합의 내용 확인 후 서명을 진행해주세요.</p>
+                    <h2 style="margin-bottom: 5px;">조율 확인서 작성 및 결제</h2>
+                    <p style="color: var(--text-muted);">최종 조율 내용 확인 후 서명을 진행해주세요.</p>
                 </div>
             </div>
 
@@ -96,38 +96,37 @@
                     <!-- Document Preview -->
                     <div class="document-viewer">
                         <div class="paper-doc">
-                            <h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif; margin-bottom: 30px;">형
-                                사 합 의 서</h1>
+                            <h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif; margin-bottom: 30px;">조 율 확 인 서</h1>
 
                             <p class="doc-text">
-                                <strong>피해자 (갑):</strong> 홍길동 (800101-1******)<br>
-                                <strong>가해자 (을):</strong> 김철수 (820505-1******)
+                                <strong>제안자 (갑):</strong> 홍길동 (800101-1******)<br>
+                                <strong>상대방 (을):</strong> 김철수 (820505-1******)
                             </p>
 
                             <p class="doc-text">
-                                위 당사자들은 <strong>2024형제12345 폭행 사건</strong>과 관련하여 다음과 같이 원만히 합의한다.
+                                위 당사자들은 <strong>2024년 제12345 안건</strong>에 관하여 다음과 같이 원만히 합의한다.
                             </p>
 
                             <ol class="doc-list">
                                 <li>
-                                    "을"은 "갑"에게 본 사건의 피해보상금으로 <strong>금 삼백오십만원정 (\3,500,000)</strong>을 지급한다.
-                                    지급은 본 플랫폼의 에스크로 계좌를 통해 이루어지며, 입금 확인 즉시 본 합의서의 효력이 발생한다.
+                                    "을"은 "갑"에게 안건에 대한 조율금으로 <strong>금 삼백오십만원 정 (\3,500,000)</strong>을 지급한다.
+                                    지급은 플랫폼의 에스크로 계좌를 통해 이루어지며, 입금 확인 즉시 본 조율서의 효력이 발생한다.
                                 </li>
                                 <li>
-                                    "갑"은 본 합의금을 수령함과 동시에 "을"의 처벌을 원하지 않는다는 의사를 표시하며,
-                                    향후 본 사건과 관련하여 민·형사상 어떠한 이의도 제기하지 않는다.
+                                    "갑"은 위 조율금을 수령함과 동시에 향후 본 안건에 관련된 모든 이의제기를 하지 않으며,
+                                    이후 본 안건과 관련하여 추가적인 요구를 하지 않는다.
                                 </li>
                                 <li>
-                                    위 당사자는 본 사건과 관련된 사실을 제3자에게 유포하거나 상대방을 비방하지 않을 것을 약속한다.
+                                    양 당사자는 본 안건과 관련된 사실을 외부에 유포하거나 상대방을 비방하지 않을 것을 약속한다.
                                 </li>
                             </ol>
 
                             <div class="doc-footer" style="margin-top: 50px; text-align: center;">
-                                <p>2026년 1월 8일</p>
+                                <p>2026년 4월 25일</p>
                                 <br>
                                 <div style="display: flex; justify-content: space-around;">
-                                    <div>위 피해자(갑): <span id="sign-place-1" style="color:red;">(서명 대기)</span></div>
-                                    <div>위 가해자(을): <span id="sign-place-2" style="font-weight:bold;">김철수 (인)</span>
+                                    <div>위 제안자 (갑): <span id="sign-place-1" style="color:red;">(서명 또는 인)</span></div>
+                                    <div>위 상대방 (을): <span id="sign-place-2" style="font-weight:bold;">김철수 (인)</span>
                                     </div>
                                 </div>
                             </div>
@@ -156,13 +155,13 @@
                             style="margin-top: 20px; opacity: 0.5; pointer-events: none;" id="paymentCard">
                             <h3>결제 (Escrow)</h3>
                             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                                합의금 <strong>3,500,000원</strong>
+                                조율금액: <strong>3,500,000원</strong>
                             </p>
                             <div class="payment-methods">
                                 <div class="method selected"><i class="fas fa-university"></i> 가상계좌</div>
                                 <div class="method"><i class="far fa-credit-card"></i> 카드결제</div>
                             </div>
-                            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" id="payBtn">입금 요청
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" id="payBtn">송금 요청
                                 (에스크로)</button>
                         </div>
                     </div>
@@ -178,8 +177,8 @@
             style="background: white; width: 400px; padding: 30px; border-radius: 12px; text-align: center; color: #333;">
             <div id="pdfLoading">
                 <i class="fas fa-file-pdf fa-3x" style="color: #e74c3c; margin-bottom: 20px;"></i>
-                <h3 style="margin-bottom: 10px;">합의서 생성 중...</h3>
-                <p style="color: #666; font-size: 0.9rem;">전자 서명과 타임스탬프(TSA)를<br>문서에 날인하고 있습니다.</p>
+                <h3 style="margin-bottom: 10px;">조율 확인서 생성 중..</h3>
+                <p style="color: #666; font-size: 0.9rem;">전자 서명 및 타임스탬프(TSA)를<br>문서에 적용하고 있습니다.</p>
                 <div
                     style="width: 100%; background: #eee; height: 6px; border-radius: 3px; margin-top: 20px; overflow: hidden;">
                     <div

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자 페이지 - SafeHappE</title>
+    <title>관리자 페이지 - HappyHappE</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,7 +17,6 @@
             padding: 44px 24px 80px;
         }
 
-        /* ── Top Bar ── */
         .admin-topbar {
             display: flex;
             justify-content: space-between;
@@ -43,7 +42,6 @@
             letter-spacing: 0.06em;
         }
 
-        /* ── Login ── */
         .login-card-admin {
             max-width: 380px;
             margin: 80px auto;
@@ -69,7 +67,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* ── Stats Row ── */
         .stats-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -97,7 +94,6 @@
             color: var(--text-muted);
         }
 
-        /* ── Tabs ── */
         .tab-nav {
             display: flex;
             gap: 4px;
@@ -126,7 +122,6 @@
         }
         .tab-btn i { margin-right: 6px; }
 
-        /* ── Table ── */
         .table-wrap {
             background: rgba(255,255,255,0.025);
             border: 1px solid rgba(255,255,255,0.07);
@@ -186,7 +181,6 @@
             font-size: 0.95rem;
         }
 
-        /* Mobile */
         @media (max-width: 640px) {
             .admin-topbar { flex-direction: column; align-items: flex-start; gap: 12px; }
             .tab-nav { width: 100%; }
@@ -216,7 +210,7 @@
             <i class="fas fa-lock lock-icon"></i>
             <h3>관리자 인증</h3>
             <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:20px;">
-                관리자 전용 페이지입니다.<br>인가된 키를 입력해 주세요.
+                관리자 전용 페이지입니다.<br>관리자 키를 입력해주세요.
             </p>
             <input type="password" id="adminKey" class="form-input"
                 placeholder="관리자 키 입력"
@@ -234,19 +228,19 @@
             <div class="stats-row">
                 <div class="stat-card-admin">
                     <div class="num" id="statVisits" style="color: #c084fc;">-</div>
-                    <div class="label"><i class="fas fa-eye" style="margin-right:5px;"></i>누적 방문자 수</div>
+                    <div class="label"><i class="fas fa-eye" style="margin-right:5px;"></i>누적 방문자</div>
                 </div>
                 <div class="stat-card-admin">
                     <div class="num" id="statConsult" style="color: var(--secondary);">-</div>
-                    <div class="label"><i class="fas fa-headset" style="margin-right:5px;"></i>총 상담 신청</div>
+                    <div class="label"><i class="fas fa-headset" style="margin-right:5px;"></i>상담 요청</div>
                 </div>
                 <div class="stat-card-admin">
                     <div class="num" id="statUsers" style="color: var(--primary);">-</div>
-                    <div class="label"><i class="fas fa-users" style="margin-right:5px;"></i>총 가입 회원</div>
+                    <div class="label"><i class="fas fa-users" style="margin-right:5px;"></i>가입 회원</div>
                 </div>
                 <div class="stat-card-admin">
                     <div class="num" id="statNewUsers" style="color: #4ade80;">-</div>
-                    <div class="label"><i class="fas fa-user-plus" style="margin-right:5px;"></i>신규 가입(7일)</div>
+                    <div class="label"><i class="fas fa-user-plus" style="margin-right:5px;"></i>신규 회원(7일)</div>
                 </div>
             </div>
 
@@ -254,7 +248,7 @@
             <div class="tab-nav">
                 <button class="tab-btn active" id="tabBtn-consultations"
                     onclick="switchTab('consultations')">
-                    <i class="fas fa-headset"></i>상담 신청 내역
+                    <i class="fas fa-headset"></i>상담 요청 내역
                 </button>
                 <button class="tab-btn" id="tabBtn-users"
                     onclick="switchTab('users')">
@@ -272,8 +266,8 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>신청일시</th>
-                                <th>신청인</th>
+                                <th>요청일시</th>
+                                <th>요청인</th>
                                 <th>전화번호</th>
                                 <th>상담 내용</th>
                                 <th>상태</th>
@@ -305,7 +299,7 @@
             <!-- Tab 3: Visits -->
             <div id="tab-visits" style="display:none;">
                 <div style="background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; margin-bottom: 24px;">
-                    <h3 style="margin-top:0; margin-bottom: 20px; font-size:1.1rem;"><i class="fas fa-calendar-alt" style="margin-right:8px; color:var(--primary);"></i>최근 7일 일별 방문자 추이</h3>
+                    <h3 style="margin-top:0; margin-bottom: 20px; font-size:1.1rem;"><i class="fas fa-calendar-alt" style="margin-right:8px; color:var(--primary);"></i>최근 7일 방문자 추이</h3>
                     <div style="position: relative; height:300px; width:100%">
                         <canvas id="visitsChart"></canvas>
                     </div>
@@ -318,7 +312,7 @@
                     </div>
                     <div class="stat-card-admin" style="padding: 30px;">
                         <div class="num" id="statVisitsWeek" style="color: #38bdf8; font-size: 3rem;">0</div>
-                        <div class="label" style="font-size: 1rem; margin-top:10px;">최근 7일 방분자 수</div>
+                        <div class="label" style="font-size: 1rem; margin-top:10px;">최근 7일 방문자 수</div>
                     </div>
                 </div>
             </div>
@@ -345,13 +339,12 @@
                 const visitsData = await visitsRes.json();
 
                 if (!consultData.success) {
-                    return alert('접근 권한이 없습니다. 관리자 키를 확인하세요.');
+                    return alert('접근 권한이 없습니다. 관리자 키를 확인해주세요.');
                 }
 
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('dataSection').style.display  = 'block';
 
-                // Stats
                 const consultList = consultData.list || [];
                 const userList    = usersData.success ? usersData.list : [];
                 const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
@@ -390,7 +383,7 @@
         function renderConsultations(list) {
             const tbody = document.getElementById('consultTableBody');
             if (!list.length) {
-                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">📭 상담 신청 내역이 없습니다.</td></tr>';
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">상담 요청 내역이 없습니다.</td></tr>';
                 return;
             }
             tbody.innerHTML = list.map(item => {
@@ -401,7 +394,7 @@
                         <td><strong>${item.name || '-'}</strong></td>
                         <td style="white-space:nowrap;">${item.phoneNumber}</td>
                         <td>
-                            <div style="font-weight:600; margin-bottom:5px; color:var(--text-main);">[요지] ${item.summary}</div>
+                            <div style="font-weight:600; margin-bottom:5px; color:var(--text-main);">[내용] ${item.summary}</div>
                             <div style="font-size:0.84rem; color:#aaa; line-height:1.5;">${item.details}</div>
                         </td>
                         <td><span class="badge badge-pending">${item.status}</span></td>
@@ -412,7 +405,7 @@
         function renderUsers(list) {
             const tbody = document.getElementById('usersTableBody');
             if (!list.length) {
-                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">👤 가입 회원이 없습니다.</td></tr>';
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">가입 회원이 없습니다.</td></tr>';
                 return;
             }
             const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
@@ -429,8 +422,8 @@
                         <td>${user.email}</td>
                         <td>${user.phoneNumber || '-'}</td>
                         <td>${user.messageNotification
-                            ? '<span style="color:#4ade80;">✅ 수신</span>'
-                            : '<span style="color:#aaa;">❌ 거부</span>'}</td>
+                            ? '<span style="color:#4ade80;">수신동의</span>'
+                            : '<span style="color:#aaa;">수신거부</span>'}</td>
                     </tr>`;
             }).join('');
         }
