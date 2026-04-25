@@ -27,11 +27,11 @@ window.getOverviewHTML = function () {
     return `
         <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
             <div class="glass-card">
-                <h3 style="margin-bottom: 20px;"><i class="fas fa-info-circle"></i> 사건 정보</h3>
+                <h3 style="margin-bottom: 20px;"><i class="fas fa-info-circle"></i> 안건 정보</h3>
                 <div style="display: flex; flex-direction: column; gap: 15px;">
                     ${titleRow}
                     <div class="info-row" style="padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <span style="color: var(--text-muted);">사건번호</span>
+                        <span style="color: var(--text-muted);">방 번호</span>
                         <span class="info-val">${caseNumber}</span>
                     </div>
                     <div class="info-row" style="padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);">
@@ -66,11 +66,11 @@ window.getOverviewHTML = function () {
                     </div>
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <i class="${window.getIconClass(isNegotiating)}" style="color: ${window.getColor(isNegotiating)}; font-size: 1.2rem; opacity: ${window.getOpacity(isNegotiating)}"></i>
-                        <span style="opacity: ${window.getOpacity(isNegotiating)}">합의금 협상</span>
+                        <span style="opacity: ${window.getOpacity(isNegotiating)}">목표 금액 협상</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <i class="${window.getIconClass(isAgreed)}" style="color: ${window.getColor(isAgreed)}; font-size: 1.2rem; opacity: ${window.getOpacity(isAgreed)}"></i>
-                        <span style="opacity: ${window.getOpacity(isAgreed)}">최종 합의서 작성</span>
+                        <span style="opacity: ${window.getOpacity(isAgreed)}">최종 조율 확인서 작성</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <i class="${window.getIconClass(isEscrow)}" style="color: ${window.getColor(isEscrow)}; font-size: 1.2rem; opacity: ${window.getOpacity(isEscrow)}"></i>
@@ -112,19 +112,19 @@ window.getQuickActionsHTML = function (role) {
     if (role === 'offender') {
         return `
             <div class="glass-card" style="grid-column: 1 / -1;">
-                <h3 style="margin-bottom: 20px;"><i class="fas fa-bolt"></i> 빠른 실행 (피의자용)</h3>
+                <h3 style="margin-bottom: 20px;"><i class="fas fa-bolt"></i> 빠른 실행 (제안자용)</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                     <button class="btn btn-glass ${btnRequest.class}" onclick="location.href='invite.html'" ${btnRequest.disabled}>
                         <i class="fas ${btnRequest.icon}" style="margin-right: 8px;"></i>합의요청
                     </button>
                     <button class="btn btn-glass ${btnApology.class}" onclick="activateMenu('apology')" ${btnApology.disabled}>
-                        <i class="fas ${btnApology.icon}" style="margin-right: 8px;"></i>사과문 작성
+                        <i class="fas ${btnApology.icon}" style="margin-right: 8px;"></i>요구사항 메모 작성
                     </button>
                     <button class="btn btn-glass ${btnProposal.class}" onclick="activateMenu('proposal')" ${btnProposal.disabled}>
-                        <i class="fas ${btnProposal.icon}" style="margin-right: 8px;"></i>합의금 제안
+                        <i class="fas ${btnProposal.icon}" style="margin-right: 8px;"></i>목표 금액 제안
                     </button>
                     <button class="btn btn-glass ${btnAgreement.class}" onclick="activateMenu('agreement')" ${btnAgreement.disabled}>
-                        <i class="fas ${btnAgreement.icon}" style="margin-right: 8px;"></i>합의서 작성
+                        <i class="fas ${btnAgreement.icon}" style="margin-right: 8px;"></i>조율 확인서 작성
                     </button>
                 </div>
             </div>
@@ -132,22 +132,22 @@ window.getQuickActionsHTML = function (role) {
     } else {
         return `
             <div class="glass-card" style="grid-column: 1 / -1;">
-                <h3 style="margin-bottom: 20px;"><i class="fas fa-bolt"></i> 빠른 실행 (피해자용)</h3>
+                <h3 style="margin-bottom: 20px;"><i class="fas fa-bolt"></i> 빠른 실행 (상대방용)</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                     <button class="btn btn-glass ${btnRequest.class}" onclick="location.href='invite.html'" ${btnRequest.disabled}>
                         <i class="fas ${btnRequest.icon}" style="margin-right: 8px;"></i>합의요청
                     </button>
                     <button class="btn btn-glass ${btnApology.class}" onclick="activateMenu('apology')" ${btnApology.disabled}>
-                        <i class="fas ${btnApology.icon}" style="margin-right: 8px;"></i>사과문 확인
+                        <i class="fas ${btnApology.icon}" style="margin-right: 8px;"></i>요구사항 메모 확인
                     </button>
                     <button class="btn btn-glass ${btnProposal.class}" onclick="activateMenu('proposal')" ${btnProposal.disabled}>
-                        <i class="fas ${btnProposal.icon}" style="margin-right: 8px;"></i>합의금 제안
+                        <i class="fas ${btnProposal.icon}" style="margin-right: 8px;"></i>목표 금액 제안
                     </button>
                     <button class="btn btn-glass ${btnAccount.class}" onclick="activateMenu('account')" ${btnAccount.disabled}>
                         <i class="fas ${btnAccount.icon}" style="margin-right: 8px;"></i>계좌 정보 등록
                     </button>
                     <button class="btn btn-glass ${btnAgreement.class}" onclick="activateMenu('agreement')" ${btnAgreement.disabled}>
-                        <i class="fas ${btnAgreement.icon}" style="margin-right: 8px;"></i>합의서 작성
+                        <i class="fas ${btnAgreement.icon}" style="margin-right: 8px;"></i>조율 확인서 작성
                     </button>
                 </div>
             </div>

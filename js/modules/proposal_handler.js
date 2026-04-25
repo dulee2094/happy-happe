@@ -449,7 +449,7 @@ window.ProposalHandler = {
                     <h3 style="color: #fbbf24; margin-bottom: 15px;">상대방의 동의를 기다립니다</h3>
                     <p style="color: #cbd5e1; line-height: 1.6; margin-bottom: 25px;">
                         귀하는 [중간값 합의] 절차에 <strong>동의</strong>하셨습니다.<br>
-                        상대방도 동의하면 즉시 합의금이 공개됩니다.
+                        상대방도 동의하면 즉시 목표 금액이 공개됩니다.
                     </p>
                     <button class="btn btn-secondary" disabled style="opacity:0.7; cursor:wait; background:#334155; color:#94a3b8; border:none; padding:10px 20px; border-radius:8px;">
                         상대방 응답 대기 중...
@@ -493,7 +493,7 @@ window.ProposalHandler = {
                         <p style="color: #cbd5e1; line-height: 1.6; margin: 0;">
                             양측의 제안 차이가 <strong>10% 이내</strong>로 좁혀졌습니다.<br>
                             두 금액의 <strong>[정확한 중간값]</strong>으로<br>
-                            합의금을 확정하시겠습니까?
+                            목표 금액을 확정하시겠습니까?
                         </p>
                     </div>
                     <div style="display: flex; gap: 10px; justify-content: center;">
@@ -538,7 +538,7 @@ window.ProposalHandler = {
 
                 <p style="color: #cbd5e1; line-height: 1.6; margin-bottom: 30px;">
                     이 금액으로 최종 합의하시겠습니까?<br>
-                    <strong>'동의' 버튼을 누르면 사건이 즉시 종결됩니다.</strong>
+                    <strong>'동의' 버튼을 누르면 협상이 즉시 타결됩니다.</strong>
                 </p>
 
                 <div style="display: flex; gap: 10px; justify-content: center;">
@@ -561,7 +561,7 @@ window.ProposalHandler = {
                 <p style="color: #94a3b8; margin-bottom: 30px;">소중한 합의에 도달하신 것을 축하드립니다.</p>
                 
                 <div style="background: rgba(74, 222, 128, 0.1); border: 2px solid #4ade80; padding: 40px; border-radius: 20px; margin-bottom: 30px;">
-                     <div style="font-size: 1rem; color: #4ade80; margin-bottom: 10px; font-weight: bold;">최종 합의금</div>
+                     <div style="font-size: 1rem; color: #4ade80; margin-bottom: 10px; font-weight: bold;">최종 목표 금액</div>
                     <div style="font-size: 3rem; font-weight: 900; color: #fff; text-shadow: 0 0 30px rgba(74, 222, 128, 0.5);">
                         ${amount} <span style="font-size: 1.5rem; color: #94a3b8;">원</span>
                     </div>

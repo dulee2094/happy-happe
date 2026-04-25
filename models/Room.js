@@ -3,7 +3,8 @@ const sequelize = require('../config/database');
 
 const Room = sequelize.define('Room', {
     roomCode: { type: DataTypes.STRING, unique: true, allowNull: false },
-    status: { type: DataTypes.STRING, defaultValue: 'pending' }, // pending, negotiating, settled
+    status: { type: DataTypes.ENUM('pending', 'negotiating', 'settled', 'expired'), defaultValue: 'pending' },
+    expiresAt: { type: DataTypes.DATE },
     partyAId: { type: DataTypes.INTEGER }, // Creator or Party A
     partyBId: { type: DataTypes.INTEGER }, // Party B
     inviteToken: { type: DataTypes.STRING },
@@ -18,7 +19,7 @@ const Room = sequelize.define('Room', {
     
     // Midpoint Agreement Logic
     midpointProposed: { type: DataTypes.BOOLEAN, defaultValue: false },
-    midpointAmount: { type: DataTypes.INTEGER }, 
+    midpointAmount: { type: DataTypes.BIGINT }, 
 
     // Step 1: Procedure Agreement
     midpointProcedurePartyAAgreed: { type: DataTypes.BOOLEAN, defaultValue: false },
@@ -38,7 +39,7 @@ const Room = sequelize.define('Room', {
     nextRoundIntentPartyA: { type: DataTypes.BOOLEAN, defaultValue: false },
     nextRoundIntentPartyB: { type: DataTypes.BOOLEAN, defaultValue: false },
 
-    finalAmount: { type: DataTypes.INTEGER }
+    finalAmount: { type: DataTypes.BIGINT }
 });
 
 module.exports = Room;

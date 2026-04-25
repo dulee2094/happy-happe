@@ -18,7 +18,7 @@ window.getChatHTML = function () {
                 </div>
                 <h3 style="margin-bottom: 15px;">안심 채팅 서비스</h3>
                 <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 30px;">
-                    피의자와 피해자가 개인 연락처 노출 없이<br>
+                    제안자와 상대방가 개인 연락처 노출 없이<br>
                     안전하게 대화할 수 있는 공간입니다.<br><br>
                     <span style="color: #4ade80; font-size: 0.9rem; background: rgba(74, 222, 128, 0.1); padding: 5px 10px; border-radius: 20px;">
                         <i class="fas fa-check"></i> 상호 동의 필수
@@ -120,13 +120,13 @@ window.getAgreementHTML = function () {
     return `
         <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 60px 40px;">
             <i class="fas fa-file-contract" style="font-size: 4rem; color: var(--text-muted); margin-bottom: 20px;"></i>
-            <h3 style="margin-bottom: 15px;">합의서 작성</h3>
+            <h3 style="margin-bottom: 15px;">조율 확인서 작성</h3>
             <p style="color: var(--text-muted); margin-bottom: 30px;">
-                ${isReady ? '이제 합의서를 작성할 수 있습니다.' : '합의금 협상이 완료되면 합의서를 작성할 수 있습니다.'}
+                ${isReady ? '이제 조율 확인서를 작성할 수 있습니다.' : '목표 금액 협상이 완료되면 조율 확인서를 작성할 수 있습니다.'}
             </p>
-            <button class="btn btn-primary" onclick="${isReady ? "location.href='agreement.html'" : "alert('아직 합의금 협상이 완료되지 않았습니다.');"}" 
+            <button class="btn btn-primary" onclick="${isReady ? "location.href='agreement.html'" : "alert('아직 목표 금액 협상이 완료되지 않았습니다.');"}" 
                 style="${isReady ? '' : 'opacity: 0.5; cursor: not-allowed;'}">
-                <i class="fas fa-plus"></i> 합의서 작성 시작하기
+                <i class="fas fa-plus"></i> 조율 확인서 작성 시작하기
             </button>
         </div>
     `;
@@ -208,12 +208,12 @@ window.getAccountInfoHTML = function () {
 
         step2HTML = `
             <div id="step2_action" class="glass-card" style="max-width: 700px; margin: 0 auto; display: none; animation: fadeIn 0.5s;">
-                    <h3 style="margin-bottom: 20px;"><i class="fas fa-file-invoice-dollar"></i> 합의금 지급 요청서 작성</h3>
+                    <h3 style="margin-bottom: 20px;"><i class="fas fa-file-invoice-dollar"></i> 목표 금액 지급 요청서 작성</h3>
                     ${statusMsg}
                     ${opponentRequestMsg}
                     <p style="color: var(--text-muted); margin-bottom: 30px; line-height:1.6;">
                     단순한 계좌 전달이 아닙니다.<br>
-                    <strong>'합의금 지급 요청서'</strong>를 발행하여 법적 증빙력을 높이세요.
+                    <strong>'목표 금액 지급 요청서'</strong>를 발행하여 법적 증빙력을 높이세요.
                     </p>
                     
                     <!-- Account Input Form -->
@@ -275,13 +275,13 @@ window.getAccountInfoHTML = function () {
         if (hasSentRequest) {
             step2HTML = `
                 <div id="step2_action" class="glass-card" style="max-width: 700px; margin: 0 auto; display: none; animation: fadeIn 0.5s;">
-                        <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 합의금 지급 요청서 도착</h3>
+                        <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 목표 금액 지급 요청서 도착</h3>
                     
                     <div id="offenderCover" style="background: rgba(255,255,255,0.05); padding: 30px; text-align: center; border-radius: 12px; margin-bottom: 30px;">
                         <i class="fas fa-file-contract" style="font-size: 4rem; color: #4ade80; margin-bottom: 20px;"></i>
-                        <h4 style="margin-bottom: 10px;">피해자로부터 공식 요청서가 도착했습니다</h4>
+                        <h4 style="margin-bottom: 10px;">상대방로부터 공식 요청서가 도착했습니다</h4>
                         <p style="color: var(--text-muted); font-size: 0.9rem;">
-                            합의금 지급을 위한 계좌 정보와 청구 내용이 담겨있습니다.<br>
+                            목표 금액 지급을 위한 계좌 정보와 청구 내용이 담겨있습니다.<br>
                             내용을 확인하고 입금을 진행해주세요.
                         </p>
                         <button class="btn btn-glass" onclick="viewReceivedDocument()" style="margin-top: 20px; border-color: #4ade80; color: #4ade80;">
@@ -300,7 +300,7 @@ window.getAccountInfoHTML = function () {
                             <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
                                 위 계좌로 입금을 완료하셨나요?
                             </p>
-                            <button class="btn btn-primary" style="width: 100%; padding: 15px;" onclick="alert('입금 완료 통보가 전송되었습니다.\\n관리자 승인 후 합의서 작성 단계가 열립니다.')">
+                            <button class="btn btn-primary" style="width: 100%; padding: 15px;" onclick="alert('입금 완료 통보가 전송되었습니다.\\n관리자 승인 후 조율 확인서 작성 단계가 열립니다.')">
                                 <i class="fas fa-check-circle"></i> 입금 완료 (이체확인증 제출)
                             </button>
                             </div>
@@ -316,7 +316,7 @@ window.getAccountInfoHTML = function () {
                             <div class="spinner-border" style="width: 3rem; height: 3rem; margin-bottom: 20px; color: #4ade80; border-width: 0.2em;" role="status"></div>
                             <h4 style="color:#4ade80; margin-bottom:10px;">요청이 전송되었습니다!</h4>
                             <p style="color: var(--text-muted);">
-                                피해자에게 합의금 지급 요청서 작성을 요청했습니다.<br>
+                                상대방에게 목표 금액 지급 요청서 작성을 요청했습니다.<br>
                                 답변이 올 때까지 잠시만 기다려주세요.
                             </p>
                             </div>
@@ -325,15 +325,15 @@ window.getAccountInfoHTML = function () {
             } else {
                 step2HTML = `
                     <div id="step2_action" class="glass-card" style="max-width: 600px; margin: 0 auto; display: none; animation: fadeIn 0.5s;">
-                            <h3 style="margin-bottom: 20px;"><i class="fas fa-comment-dollar"></i> 합의금 지급 준비</h3>
+                            <h3 style="margin-bottom: 20px;"><i class="fas fa-comment-dollar"></i> 목표 금액 지급 준비</h3>
                             <div style="text-align: center; padding: 30px; background:rgba(255,255,255,0.05); border-radius:12px;">
                             <i class="fas fa-hand-holding-usd" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px;"></i>
                             <p style="color: var(--text-muted); margin-bottom:20px;">
-                                아직 피해자로부터 지급 요청서(계좌 정보)가 도착하지 않았습니다.<br>
+                                아직 상대방로부터 지급 요청서(계좌 정보)가 도착하지 않았습니다.<br>
                                 빠른 처리를 위해 먼저 요청해보시는 건 어떨까요?
                             </p>
                                 <button class="btn btn-primary" style="width: 100%; padding: 15px;" onclick="requestAccountInfo()">
-                                <i class="fas fa-paper-plane"></i> 합의금 지급 요청서(계좌) 보내달라고 하기
+                                <i class="fas fa-paper-plane"></i> 목표 금액 지급 요청서(계좌) 보내달라고 하기
                             </button>
                             </div>
                     </div>
@@ -351,22 +351,22 @@ window.generateDocumentHTML = function (title, toName, fromName, amount, data, d
         <div id="${docId}" style="text-align: left; background: #fff; color: #333; padding: 40px; border-radius: 4px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); position: relative;">
             <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%) rotate(-30deg); font-size: 4rem; color: rgba(0,0,0,0.05); font-weight:bold; white-space:nowrap; pointer-events:none;">PAYMENT REQUEST</div>
             <div style="border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 30px; text-align: center;">
-                <h2 style="margin:0; font-size: 1.8rem; font-family: 'Noto Serif KR', serif; color:#000;">합의금 지급 요청서</h2>
+                <h2 style="margin:0; font-size: 1.8rem; font-family: 'Noto Serif KR', serif; color:#000;">목표 금액 지급 요청서</h2>
             </div>
             <div style="margin-bottom: 20px;">
                 <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
                     <tr><td style="width: 100px; font-weight: bold; padding: 5px 0;">사 건 명</td><td>${title}</td></tr>
-                    <tr><td style="font-weight: bold; padding: 5px 0;">수 &nbsp;신 &nbsp;인</td><td>${toName} (가해자)</td></tr>
-                    <tr><td style="font-weight: bold; padding: 5px 0;">발 &nbsp;신 &nbsp;인</td><td>${fromName} (피해자)</td></tr>
+                    <tr><td style="font-weight: bold; padding: 5px 0;">수 &nbsp;신 &nbsp;인</td><td>${toName} (수신자)</td></tr>
+                    <tr><td style="font-weight: bold; padding: 5px 0;">발 &nbsp;신 &nbsp;인</td><td>${fromName} (상대방)</td></tr>
                 </table>
             </div>
             <div style="background: #f9f9f9; padding: 15px; border: 1px solid #ddd; margin-bottom: 20px; text-align: center;">
-                <div style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">청구 금액 (합의금)</div>
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">청구 금액 (목표 금액)</div>
                 <div style="font-size: 1.5rem; font-weight: bold; color: #000;">금 ${amount}원</div>
             </div>
             <div style="margin-bottom: 30px; line-height: 1.8; font-size: 0.95rem; text-align: justify;">
-                본인은 위 사건의 피해자로서, 양 당사자 간에 협의된 조건에 따라 위 금액의 지급을 공식적으로 요청합니다.<br>
-                아래 명시된 계좌로 해당 금액이 입금될 경우, 이는 실질적인 피해 회복 및 합의 이행 의사로 간주되며, 추후 합의서 작성의 기초가 됨을 확인합니다.
+                본인은 위 안건의 당사자로서, 양 당사자 간에 협의된 조건에 따라 위 금액의 지급을 공식적으로 요청합니다.<br>
+                아래 명시된 계좌로 해당 금액이 입금될 경우, 이는 실질적인 피해 회복 및 합의 이행 의사로 간주되며, 추후 조율 확인서 작성의 기초가 됨을 확인합니다.
             </div>
             <div style="margin-bottom: 30px;">
                 <h4 style="border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px; font-size:1rem;">[ 입금 지정 계좌 ]</h4>
@@ -488,7 +488,7 @@ window.sendPaymentRequest = async function (amount) {
                 console.error("Auto-save doc failed", err);
             }
 
-            alert("📨 [발송 완료]\\n상대방에게 합의금 지급 요청서가 전달되었습니다.\\n(서류 공유함에도 자동 저장되었습니다)");
+            alert("📨 [발송 완료]\\n상대방에게 목표 금액 지급 요청서가 전달되었습니다.\\n(서류 공유함에도 자동 저장되었습니다)");
             if (window.loadPaymentRequestStatus) window.loadPaymentRequestStatus();
         } else {
             alert("발송 실패: " + data.error);
@@ -550,11 +550,11 @@ window.loadPaymentRequestStatus = async () => {
 
                 const step2 = document.getElementById('step2_action');
                 step2.innerHTML = `
-                        <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 합의금 지급 요청서 도착</h3>
+                        <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 목표 금액 지급 요청서 도착</h3>
                     
                     <div id="offenderCover" style="background: rgba(255,255,255,0.05); padding: 30px; text-align: center; border-radius: 12px; margin-bottom: 30px;">
                         <i class="fas fa-file-contract" style="font-size: 4rem; color: #4ade80; margin-bottom: 20px;"></i>
-                        <h4 style="margin-bottom: 10px;">피해자로부터 공식 요청서가 도착했습니다</h4>
+                        <h4 style="margin-bottom: 10px;">상대방로부터 공식 요청서가 도착했습니다</h4>
                         <button class="btn btn-glass" onclick="viewReceivedDocument()" style="margin-top: 20px; border-color: #4ade80; color: #4ade80;">
                             <i class="fas fa-search"></i> 요청서 열람 및 계좌 확인
                         </button>
@@ -598,14 +598,14 @@ window.downloadPaymentRequest = function (elementId) {
 
     html2canvas(element, { scale: 2 }).then(canvas => {
         const link = document.createElement('a');
-        link.download = '합의금_지급_요청서.png';
+        link.download = '목표 금액_지급_요청서.png';
         link.href = canvas.toDataURL();
         link.click();
     });
 };
 
 window.requestAccountInfo = function () {
-    if (!confirm("피해자에게 합의금 지급 요청서(계좌 정보) 작성을 요청하시겠습니까?")) return;
+    if (!confirm("상대방에게 목표 금액 지급 요청서(계좌 정보) 작성을 요청하시겠습니까?")) return;
     localStorage.setItem('account_requested_by_offender', 'true');
     alert("🔔 상대방에게 요청 알림을 보냈습니다.\\n답변이 올 때까지 잠시만 기다려주세요.");
     location.reload();

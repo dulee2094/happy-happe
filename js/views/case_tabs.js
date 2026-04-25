@@ -9,7 +9,7 @@ window.getProposalHTML = function () {
                 <i class="fas fa-hand-holding-usd" style="font-size: 2.5rem; color: var(--secondary);"></i>
             </div>
             
-            <h2 style="margin-bottom: 15px;">블라인드 합의금 조율</h2>
+            <h2 style="margin-bottom: 15px;">블라인드 목표 금액 조율</h2>
             <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.05rem; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto;">
                 상대방에게 구체적인 금액을 노출하지 않고,<br>
                 안전하게 합의점을 찾아가는 <strong>블라인드 제안 시스템</strong>입니다.
@@ -17,7 +17,7 @@ window.getProposalHTML = function () {
             
             <button class="btn btn-primary" onclick="location.href='blind_proposal.html'" 
                 style="padding: 18px 40px; font-size: 1.1rem; border-radius: 50px; box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3); transition: all 0.3s ease;">
-                <i class="fas fa-search-dollar" style="margin-right: 10px;"></i> 합의금 제안하러 가기
+                <i class="fas fa-search-dollar" style="margin-right: 10px;"></i> 목표 금액 제안하러 가기
             </button>
         </div>
     `;
@@ -32,15 +32,15 @@ window.getApologyHTML = function () {
                     <i class="fas fa-feather-alt" style="font-size: 2.5rem; color: var(--secondary);"></i>
                 </div>
                 
-                <h2 style="margin-bottom: 15px;">사과문 작성 스튜디오</h2>
+                <h2 style="margin-bottom: 15px;">요구사항 메모 작성 스튜디오</h2>
                 <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.05rem; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto;">
-                    진심이 담긴 사과문은 피해자의 마음을 움직이는 가장 큰 힘입니다.<br>
-                    전용 에디터에서 AI의 도움을 받아 진정성 있는 사과문을 작성해보세요.
+                    진심이 담긴 요구사항 메모은 상대방의 마음을 움직이는 가장 큰 힘입니다.<br>
+                    전용 에디터에서 AI의 도움을 받아 진정성 있는 요구사항 메모을 작성해보세요.
                 </p>
                 
                 <button class="btn btn-primary" onclick="location.href='apology_write.html'" 
                     style="padding: 18px 40px; font-size: 1.1rem; border-radius: 50px; box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3); transition: all 0.3s ease;">
-                    <i class="fas fa-pen-nib" style="margin-right: 10px;"></i> 사과문 작성하러 가기
+                    <i class="fas fa-pen-nib" style="margin-right: 10px;"></i> 요구사항 메모 작성하러 가기
                 </button>
             </div>
         `;
@@ -52,12 +52,12 @@ window.getApologyHTML = function () {
         if (apologyStatus === 'sent' || apologyStatus === 'read') {
             return `
                 <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
-                    <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 도착한 사과문</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 30px;">피의자로부터 도착한 사과문입니다.</p>
+                    <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 도착한 요구사항 메모</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 30px;">제안자로부터 도착한 요구사항 메모입니다.</p>
 
                     <div id="apologyImageContainer" style="margin-bottom: 30px; text-align: center; display: none;">
                         <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; display: inline-block;">
-                            <img id="apologyImage" src="" alt="사과문 이미지" style="max-width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                            <img id="apologyImage" src="" alt="요구사항 메모 이미지" style="max-width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
                         </div>
                         <div style="margin-top: 15px;">
                             <a id="apologyDownloadBtn" href="#" download class="btn btn-glass" style="font-size: 0.9rem; padding: 8px 16px;">
@@ -80,10 +80,10 @@ window.getApologyHTML = function () {
                     <div style="width: 80px; height: 80px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px;">
                         <i class="far fa-envelope" style="font-size: 2.5rem; color: var(--text-muted);"></i>
                     </div>
-                    <h3 style="margin-bottom: 15px; color: var(--text-muted);">아직 도착한 사과문이 없습니다</h3>
+                    <h3 style="margin-bottom: 15px; color: var(--text-muted);">아직 도착한 요구사항 메모이 없습니다</h3>
                     <p style="color: var(--text-muted); opacity: 0.6; margin-bottom: 0;">
-                        피의자가 아직 사과문을 작성하지 않았습니다.<br>
-                        사과문이 도착하면 알림을 보내드립니다.
+                        제안자가 아직 요구사항 메모을 작성하지 않았습니다.<br>
+                        요구사항 메모이 도착하면 알림을 보내드립니다.
                     </p>
                 </div>
             `;

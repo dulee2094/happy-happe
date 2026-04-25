@@ -45,8 +45,8 @@ window.getMediationHTML = function () {
                 </div>
 
                  <div class="form-group" style="text-align: left;">
-                    <label class="form-label">사건의 요지</label>
-                    <textarea id="consultSum" class="form-input" rows="3" placeholder="사건의 경위와 핵심 내용을 간단히 요약해서 작성해주세요."></textarea>
+                    <label class="form-label">안건의 요지</label>
+                    <textarea id="consultSum" class="form-input" rows="3" placeholder="안건의 배경과 핵심 내용을 간단히 요약해서 작성해주세요."></textarea>
                 </div>
 
                  <div class="form-group" style="text-align: left;">

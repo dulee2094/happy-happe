@@ -4,7 +4,7 @@ const sequelize = require('../config/database');
 const Proposal = sequelize.define('Proposal', {
     roomId: { type: DataTypes.INTEGER, allowNull: false },
     proposerId: { type: DataTypes.INTEGER, allowNull: false },
-    amount: { type: DataTypes.INTEGER, allowNull: false },
+    amount: { type: DataTypes.BIGINT, allowNull: false },
     round: { type: DataTypes.INTEGER, defaultValue: 1 }, // Round number for matching proposals
     position: { type: DataTypes.STRING }, // 'payer' or 'receiver'
     message: { type: DataTypes.TEXT },

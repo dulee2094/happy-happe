@@ -379,7 +379,7 @@ window.getHelpPageHTML = function () {
                        <i class="fas fa-chevron-down"></i>
                    </summary>
                    <div class="faq-content">
-                       <span class="faq-a-mark">A.</span> 블라인드 합의는 양측이 원하는 합의금을 서로 모르는 상태에서 비밀리에 시스템에 입력하는 방식입니다. <span class="faq-highlight">입력하신 금액은 절대 상대방에게 노출되지 않습니다.</span> 양측이 입력한 금액이 서로 교차(가해자 제시액 ≥ 피해자 요구액)할 때만 합의가 성사되며, 성사 시에만 알림이 전송되므로 심리전 없이 안전하게 속마음을 타진해볼 수 있습니다.
+                       <span class="faq-a-mark">A.</span> 블라인드 합의는 양측이 원하는 목표 금액을 서로 모르는 상태에서 비밀리에 시스템에 입력하는 방식입니다. <span class="faq-highlight">입력하신 금액은 절대 상대방에게 노출되지 않습니다.</span> 양측이 입력한 금액이 서로 교차(지급자 제시액 ≥ 수령자 요구액)할 때만 합의가 성사되며, 성사 시에만 알림이 전송되므로 심리전 없이 안전하게 속마음을 타진해볼 수 있습니다.
                    </div>
                </details>
 
@@ -389,7 +389,7 @@ window.getHelpPageHTML = function () {
                        <i class="fas fa-chevron-down"></i>
                    </summary>
                    <div class="faq-content">
-                       <span class="faq-a-mark">A.</span> 시스템상 합의가 매칭되는 것은 '금액에 대한 양측의 합의 의사'가 일치했음을 의미할 뿐, 완벽한 의미의 법적 효력(처벌불원, 민형사상 청구 포기 등)을 시스템이 직접 보장하지는 않습니다. 따라서 가장 안전하고 확실한 법적 마무리를 위해서는 매칭 결과에 만족하셨더라도 <span class="faq-highlight">변호사 등 법률 전문가와 별도로 상담하여 합의서의 효력과 이후 절차를 꼼꼼히 확인</span>받고 진행하시는 것을 권장합니다.
+                       <span class="faq-a-mark">A.</span> 시스템상 조율이 매칭되는 것은 '금액에 대한 양측의 조율 의사'가 일치했음을 의미할 뿐, 완벽한 의미의 법적 효력을 시스템이 직접 보장하지는 않습니다. 따라서 가장 안전하고 확실한 법적 마무리를 위해서는 매칭 결과에 만족하셨더라도 <span class="faq-highlight">전문가와 별도로 상담하여 조율 확인서의 효력과 이후 절차를 꼼꼼히 확인</span>받고 진행하시는 것을 권장합니다.
                    </div>
                </details>
 
@@ -399,7 +399,7 @@ window.getHelpPageHTML = function () {
                        <i class="fas fa-chevron-down"></i>
                    </summary>
                    <div class="faq-content">
-                       <span class="faq-a-mark">A.</span> 세이프합의는 소모적인 감정싸움 없이 형사합의의 성공 가능성을 높이고자 개발되었으며, 현재 모든 기능을 <span class="faq-highlight">무료로 제공</span>하고 있습니다. 무료로 운영 및 관리되는 플랫폼 특성상 이용 중 불가피하게 시스템 오류나 일시적인 문제가 발생할 수 있음을 양해 부탁드립니다. 문제 발생 시 언제든지 <span class="faq-highlight">관리자 이메일(dulee2094@naver.com)</span>로 상황을 알려주시면 신속하게 확인하여 조치하겠습니다.
+                       <span class="faq-a-mark">A.</span> 해피합의는 소모적인 감정싸움 없이 원만한 조율의 성공 가능성을 높이고자 개발되었으며, 현재 모든 기능을 <span class="faq-highlight">무료로 제공</span>하고 있습니다. 무료로 운영 및 관리되는 플랫폼 특성상 이용 중 불가피하게 시스템 오류나 일시적인 문제가 발생할 수 있음을 양해 부탁드립니다. 문제 발생 시 언제든지 <span class="faq-highlight">관리자 이메일(dulee2094@naver.com)</span>로 상황을 알려주시면 신속하게 확인하여 조치하겠습니다.
                    </div>
                </details>
            </div>
@@ -408,48 +408,33 @@ window.getHelpPageHTML = function () {
 };
 
 window.getGuidePageHTML = function () {
-    // 1. Logic & Data Definition (Refactored: Moved outside of return string for safety)
     const QUOTES_DB = {
         offender: [
-            { text: "잘못을 인정하는 것은 수치가 아니다. 어제보다 오늘 더 현명해졌다는 증거다.", author: "알렉산더 포프", icon: "fa-feather-alt" },
-            { text: "진정한 뉘우침은 과거의 행동을 후회하는 것뿐만 아니라, 미래의 행동을 변화시키는 것이다.", author: "스피노자", icon: "fa-road" },
-            { text: "허물이 있다면 고치기를 꺼리지 말라. (과즉물탄개)", author: "공자", icon: "fa-scroll" },
-            { text: "자신의 잘못을 인정하는 것은 결백한 사람만이 할 수 있는 용기다.", author: "세네카", icon: "fa-balance-scale" },
-            { text: "자기 잘못을 시인하면 오히려 존경받는다. 싸움은 끝내고 신뢰는 시작된다.", author: "데일 카네기", icon: "fa-handshake" },
-            { text: "가장 위대한 승리는 자기 자신을 이기는 것이다.", author: "톨스토이", icon: "fa-trophy" },
-            { text: "실수를 저지르는 것은 인간이다. 하지만 실수를 고치지 않는 것은 어리석음이다.", author: "소포클레스", icon: "fa-landmark" },
-            { text: "잘못을 뉘우치는 마음이 곧 도(道)에 들어가는 첫걸음이다.", author: "채근담", icon: "fa-leaf" },
-            { text: "부끄러움을 아는 마음이 의로움의 시작이다 (수오지심).", author: "맹자", icon: "fa-spa" },
-            { text: "변명을 잘하는 사람은 그 외에 잘하는 것이 거의 없다.", author: "벤자민 프랭클린", icon: "fa-clock" }
+            { text: "타협은 훌륭한 우산이지만, 형편없는 지붕이다.", author: "로웰", icon: "fa-umbrella" },
+            { text: "협상에서 가장 중요한 것은 상대방이 말하지 않은 것을 듣는 것이다.", author: "피터 드러커", icon: "fa-ear-listen" },
+            { text: "당신이 동의하지 않는 사람의 입장에 서보는 것이 지혜의 시작이다.", author: "찰스 다윈", icon: "fa-shoe-prints" },
+            { text: "서로 양보하지 않으면 교착 상태에 빠지지만, 조금씩 양보하면 새로운 길이 열린다.", author: "작자 미상", icon: "fa-door-open" }
         ],
         victim: [
-            { text: "용서는 과거를 바꿀 수 없지만, 미래를 확장시킨다.", author: "폴 보시", icon: "fa-cloud-sun" },
-            { text: "분노를 품고 있는 것은 독을 마시고 남이 죽기를 바라는 것과 같다.", author: "부처", icon: "fa-fire-alt" },
-            { text: "약한 자는 절대 용서할 수 없다. 용서는 강한 자의 속성이다.", author: "마하트마 간디", icon: "fa-fist-raised" },
-            { text: "미움은 미움으로 갚아서는 결코 사라지지 않는다. 오직 자비로만 사라진다.", author: "법구경", icon: "fa-hands-holding-circle" },
-            { text: "용기 있는 사람들은 평화를 위해 용서하는 것을 두려워하지 않는다.", author: "넬슨 만델라", icon: "fa-dove" },
-            { text: "어둠으로 어둠을 몰아낼 수 없다. 오직 빛만이 할 수 있다.", author: "마틴 루터 킹", icon: "fa-lightbulb" },
-            { text: "바꿀 수 없는 것을 받아들이는 평온함을 주소서.", author: "라인홀드 니부어", icon: "fa-water" },
-            { text: "흐르는 물은 썩지 않나니, 마음의 앙금을 흘려보내라.", author: "장자", icon: "fa-stream" },
-            { text: "용서란 내가 겪은 고통이 헛되지 않게 하는 것이다.", author: "CS 루이스", icon: "fa-book-open" },
-            { text: "진정한 용서는 과거가 다르기를 바라는 희망을 포기하는 것이다.", author: "오프라 윈프리", icon: "fa-sun" }
+            { text: "성공적인 협상은 양측 모두 약간의 아쉬움을 남긴 채 일어나는 법이다.", author: "에드먼드 버크", icon: "fa-handshake" },
+            { text: "이기려는 마음보다 해결하려는 마음이 더 큰 결과를 만든다.", author: "무명", icon: "fa-lightbulb" },
+            { text: "요구하기 전에 먼저 상대방의 필요를 이해하라.", author: "협상 격언", icon: "fa-compass" },
+            { text: "훌륭한 조율은 서로의 차이를 인정하는 것에서 출발한다.", author: "무명", icon: "fa-bridge" }
         ]
     };
 
     const randomOffender = QUOTES_DB.offender[Math.floor(Math.random() * QUOTES_DB.offender.length)];
     const randomVictim = QUOTES_DB.victim[Math.floor(Math.random() * QUOTES_DB.victim.length)];
 
-    // Fixed Theme Colors
     const themeOffender = {
-        gradient: "linear-gradient(135deg, #14532d, #052e16)", // Deep Forest Green
-        accent: "#ecc94b" // Gold
+        gradient: "linear-gradient(135deg, #4f46e5, #3730a3)", // Indigo
+        accent: "#c7d2fe" 
     };
     const themeVictim = {
-        gradient: "linear-gradient(135deg, #0f766e, #115e59)", // Deep Ocean Teal
-        accent: "#99f6e4" // Mint
+        gradient: "linear-gradient(135deg, #059669, #047857)", // Emerald
+        accent: "#a7f3d0" 
     };
 
-    // 2. Return HTML String
     return `
             <div class="top-bar">
                 <div>
@@ -459,22 +444,20 @@ window.getGuidePageHTML = function () {
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 30px;">
-                <!-- 1. Intro & Meaning -->
                 <div class="glass-card" style="padding: 30px;">
                     <h3 style="margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid var(--primary); padding-left: 15px;">
-                        형사 합의란 무엇인가요?
+                        블라인드 조율이란 무엇인가요?
                     </h3>
                     <p style="line-height: 1.8; color: #cbd5e1; margin-bottom: 0;">
-                        형사 합의는 단순한 금전적 보상을 넘어, 가해자가 자신의 잘못을 진심으로 뉘우치고 
-                        <span style="color: #60a5fa; font-weight: bold;">피해 회복을 위해 노력했음</span>을 증명하는 공식적인 법적 절차입니다.<br>
-                        이는 수사기관과 법원에 제출되는 가장 중요한 양형 자료 중 하나로, 사건의 원만한 해결을 위한 첫걸음입니다.
+                        블라인드 조율은 단순한 금액 흥정을 넘어, 양측이 불필요한 감정 소모 없이 원하는 목표를 달성할 수 있도록 돕는 시스템입니다.<br>
+                        직접 대면하거나 껄끄러운 대화를 피하고, 
+                        <span style="color: #60a5fa; font-weight: bold;">시스템이 제안하는 객관적인 중간점</span>에서 기분 좋게 합의점을 찾을 수 있습니다.
                     </p>
                 </div>
 
                 <div class="glass-card" style="padding: 30px;">
                     <h3 style="margin-bottom: 25px; text-align: center;">왜 블라인드 협상이 필요할까요?</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                        <!-- Party A Side -->
                         <div style="background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
                             <div style="display: flex; align-items: center; margin-bottom: 15px; color: #fbbf24;">
                                 <i class="fas fa-user-tie" style="font-size: 1.2rem; margin-right: 10px;"></i>
@@ -486,7 +469,6 @@ window.getGuidePageHTML = function () {
                             </ul>
                         </div>
 
-                        <!-- Party B Side -->
                         <div style="background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
                             <div style="display: flex; align-items: center; margin-bottom: 15px; color: #34d399;">
                                 <i class="fas fa-user-shield" style="font-size: 1.2rem; margin-right: 10px;"></i>
@@ -500,14 +482,12 @@ window.getGuidePageHTML = function () {
                     </div>
                 </div>
 
-                <!-- 3. Inspirational Quotes (Dynamic Cards) -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 10px;">
-                    <!-- Offender Quote Card -->
                      <div class="glass-card" style="position: relative; overflow: hidden; padding: 30px; border: none; background: ${themeOffender.gradient}; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
                         <i class="fas ${randomOffender.icon}" style="position: absolute; top: -10px; right: -10px; font-size: 10rem; opacity: 0.1; color: white;"></i>
                         <div style="position: relative; z-index: 1;">
                             <div style="font-size: 0.8rem; color: ${themeOffender.accent}; margin-bottom: 15px; font-weight: bold; letter-spacing: 1px;">
-                                성찰의 지혜
+                                협상의 지혜
                             </div>
                             <p style="font-size: 1.1rem; line-height: 1.6; color: white; margin-bottom: 20px; font-family: 'Gowun Dodum', sans-serif;">
                                 "${randomOffender.text}"
@@ -518,12 +498,11 @@ window.getGuidePageHTML = function () {
                         </div>
                     </div>
 
-                    <!-- Victim Quote Card -->
                      <div class="glass-card" style="position: relative; overflow: hidden; padding: 30px; border: none; background: ${themeVictim.gradient}; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
                         <i class="fas ${randomVictim.icon}" style="position: absolute; top: -10px; right: -10px; font-size: 10rem; opacity: 0.1; color: white;"></i>
                         <div style="position: relative; z-index: 1;">
                             <div style="font-size: 0.8rem; color: ${themeVictim.accent}; margin-bottom: 15px; font-weight: bold; letter-spacing: 1px;">
-                                치유의 지혜
+                                소통의 지혜
                             </div>
                             <p style="font-size: 1.1rem; line-height: 1.6; color: white; margin-bottom: 20px; font-family: 'Gowun Dodum', sans-serif;">
                                 "${randomVictim.text}"
@@ -535,37 +514,33 @@ window.getGuidePageHTML = function () {
                     </div>
                 </div>
 
-                <!-- 4. How to Use (Steps) -->
                 <div class="glass-card">
                     <h3 style="margin-bottom: 25px;">이용 방법 안내</h3>
                     <div style="display: flex; justify-content: space-between; position: relative;">
                         <div style="position: absolute; top: 25px; left: 50px; right: 50px; height: 2px; background: rgba(255,255,255,0.1); z-index: 0;"></div>
                         <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
                             <div style="width: 50px; height: 50px; background: var(--bg-card); border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">1</div>
-                            <h4 style="font-size: 0.95rem; margin-bottom: 5px;">사건 등록</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-muted);">본인의 사건 정보를<br>입력하세요.</p>
+                            <h4 style="font-size: 0.95rem; margin-bottom: 5px;">안건 등록</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">조율할 안건 정보를<br>입력하세요.</p>
                         </div>
-                         <!-- Step 2 -->
                         <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
                             <div style="width: 50px; height: 50px; background: var(--bg-card); border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">2</div>
-                            <h4 style="font-size: 0.95rem; margin-bottom: 5px;">합의 요청</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-muted);">안심 번호로 상대방에게<br>알림 메시지를 발송합니다.</p>
+                            <h4 style="font-size: 0.95rem; margin-bottom: 5px;">조율 요청</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">문자나 카톡으로 상대방에게<br>초대 링크를 발송합니다.</p>
                         </div>
-                         <!-- Step 3 -->
                         <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
                             <div style="width: 50px; height: 50px; background: var(--bg-card); border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold;">3</div>
                             <h4 style="font-size: 0.95rem; margin-bottom: 5px;">블라인드 조율</h4>
                             <p style="font-size: 0.8rem; color: var(--text-muted);">희망 금액을 입력하고<br>격차를 좁혀갑니다.</p>
                         </div>
-                         <!-- Step 4 -->
                         <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
                             <div style="width: 50px; height: 50px; background: var(--bg-card); border: 2px solid var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; color: var(--secondary);">4</div>
-                            <h4 style="font-size: 0.95rem; margin-bottom: 5px;">합의서 날인</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-muted);">합의가 성사되면<br>즉시 문서를 생성합니다.</p>
+                            <h4 style="font-size: 0.95rem; margin-bottom: 5px;">조율 확인서 날인</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">조율이 성사되면<br>즉시 문서를 생성합니다.</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 40px;">
-                        <button class="btn btn-primary" onclick="location.href='dashboard.html?page=cases'">내 사건 등록하러 가기</button>
+                        <button class="btn btn-primary" onclick="location.href='dashboard.html?page=cases'">내 협상방 만들기</button>
                     </div>
                 </div>
 

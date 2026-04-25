@@ -12,25 +12,25 @@ window.generateDocumentHTML = function (title, toName, fromName, amount, data, d
             <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%) rotate(-30deg); font-size: 4rem; color: rgba(0,0,0,0.05); font-weight:bold; white-space:nowrap; pointer-events:none;">PAYMENT REQUEST</div>
 
             <div style="border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 30px; text-align: center;">
-                <h2 style="margin:0; font-size: 1.8rem; font-family: 'Noto Serif KR', serif; color:#000;">합의금 지급 요청서</h2>
+                <h2 style="margin:0; font-size: 1.8rem; font-family: 'Noto Serif KR', serif; color:#000;">목표 금액 지급 요청서</h2>
             </div>
             
             <div style="margin-bottom: 20px;">
                 <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
                     <tr><td style="width: 100px; font-weight: bold; padding: 5px 0;">사 건 명</td><td>${title}</td></tr>
-                    <tr><td style="font-weight: bold; padding: 5px 0;">수 &nbsp;신 &nbsp;인</td><td>${toName} (가해자)</td></tr>
-                    <tr><td style="font-weight: bold; padding: 5px 0;">발 &nbsp;신 &nbsp;인</td><td>${fromName} (피해자)</td></tr>
+                    <tr><td style="font-weight: bold; padding: 5px 0;">수 &nbsp;신 &nbsp;인</td><td>${toName} (수신자)</td></tr>
+                    <tr><td style="font-weight: bold; padding: 5px 0;">발 &nbsp;신 &nbsp;인</td><td>${fromName} (상대방)</td></tr>
                 </table>
             </div>
 
             <div style="background: #f9f9f9; padding: 15px; border: 1px solid #ddd; margin-bottom: 20px; text-align: center;">
-                <div style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">청구 금액 (합의금)</div>
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">청구 금액 (목표 금액)</div>
                 <div style="font-size: 1.5rem; font-weight: bold; color: #000;">금 ${amount}원</div>
             </div>
 
             <div style="margin-bottom: 30px; line-height: 1.8; font-size: 0.95rem; text-align: justify;">
-                본인은 위 사건의 피해자로서, 양 당사자 간에 협의된 조건에 따라 위 금액의 지급을 공식적으로 요청합니다.<br>
-                아래 명시된 계좌로 해당 금액이 입금될 경우, 이는 실질적인 피해 회복 및 합의 이행 의사로 간주되며, 추후 합의서 작성의 기초가 됨을 확인합니다.
+                본인은 위 안건의 당사자로서, 양 당사자 간에 협의된 조건에 따라 위 금액의 지급을 공식적으로 요청합니다.<br>
+                아래 명시된 계좌로 해당 금액이 입금될 경우, 이는 실질적인 피해 회복 및 합의 이행 의사로 간주되며, 추후 조율 확인서 작성의 기초가 됨을 확인합니다.
             </div>
 
             <div style="margin-bottom: 30px;">
@@ -66,13 +66,13 @@ window.getAgreementHTML = function () {
     return `
         <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 60px 40px;">
             <i class="fas fa-file-contract" style="font-size: 4rem; color: var(--text-muted); margin-bottom: 20px;"></i>
-            <h3 style="margin-bottom: 15px;">합의서 작성</h3>
+            <h3 style="margin-bottom: 15px;">조율 확인서 작성</h3>
             <p style="color: var(--text-muted); margin-bottom: 30px;">
-                ${isReady ? '이제 합의서를 작성할 수 있습니다.' : '합의금 협상이 완료되면 합의서를 작성할 수 있습니다.'}
+                ${isReady ? '이제 조율 확인서를 작성할 수 있습니다.' : '목표 금액 협상이 완료되면 조율 확인서를 작성할 수 있습니다.'}
             </p>
-            <button class="btn btn-primary" onclick="${isReady ? "location.href='agreement.html'" : "alert('아직 합의금 협상이 완료되지 않았습니다.');"}" 
+            <button class="btn btn-primary" onclick="${isReady ? "location.href='agreement.html'" : "alert('아직 목표 금액 협상이 완료되지 않았습니다.');"}" 
                 style="${isReady ? '' : 'opacity: 0.5; cursor: not-allowed;'}">
-                <i class="fas fa-plus"></i> 합의서 작성 시작하기
+                <i class="fas fa-plus"></i> 조율 확인서 작성 시작하기
             </button>
         </div>
     `;
@@ -154,7 +154,7 @@ window.getAccountInfoHTML = function () {
 
         step2HTML = `
             <div id="step2_action" class="glass-card" style="max-width: 700px; margin: 0 auto; display: none; animation: fadeIn 0.5s;">
-                    <h3 style="margin-bottom: 20px;"><i class="fas fa-file-invoice-dollar"></i> 합의금 지급 요청서 작성</h3>
+                    <h3 style="margin-bottom: 20px;"><i class="fas fa-file-invoice-dollar"></i> 목표 금액 지급 요청서 작성</h3>
                     ${statusMsg}
                     ${opponentRequestMsg}
                     <p style="color: var(--text-muted); margin-bottom: 30px; line-height:1.6;">
@@ -214,11 +214,11 @@ window.getAccountInfoHTML = function () {
         if (hasSentRequest) {
             step2HTML = `
                 <div id="step2_action" class="glass-card" style="max-width: 700px; margin: 0 auto; display: none; animation: fadeIn 0.5s;">
-                        <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 합의금 지급 요청서 도착</h3>
+                        <h3 style="margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> 목표 금액 지급 요청서 도착</h3>
                     
                     <div id="offenderCover" style="background: rgba(255,255,255,0.05); padding: 30px; text-align: center; border-radius: 12px; margin-bottom: 30px;">
                         <i class="fas fa-file-contract" style="font-size: 4rem; color: #4ade80; margin-bottom: 20px;"></i>
-                        <h4 style="margin-bottom: 10px;">피해자로부터 공식 요청서가 도착했습니다</h4>
+                        <h4 style="margin-bottom: 10px;">상대방로부터 공식 요청서가 도착했습니다</h4>
                         <button class="btn btn-glass" onclick="viewReceivedDocument()" style="margin-top: 20px; border-color: #4ade80; color: #4ade80;">
                             <i class="fas fa-search"></i> 요청서 열람 및 계좌 확인
                         </button>
@@ -246,10 +246,10 @@ window.getAccountInfoHTML = function () {
         } else {
             step2HTML = `
                 <div id="step2_action" class="glass-card" style="max-width: 600px; margin: 0 auto; display: none; animation: fadeIn 0.5s;">
-                        <h3 style="margin-bottom: 20px;"><i class="fas fa-comment-dollar"></i> 합의금 지급 준비</h3>
+                        <h3 style="margin-bottom: 20px;"><i class="fas fa-comment-dollar"></i> 목표 금액 지급 준비</h3>
                         <div style="text-align: center; padding: 30px; background:rgba(255,255,255,0.05); border-radius:12px;">
                          <button class="btn btn-primary" style="width: 100%; padding: 15px;" onclick="requestAccountInfo()">
-                            <i class="fas fa-paper-plane"></i> 합의금 지급 요청서(계좌) 보내달라고 하기
+                            <i class="fas fa-paper-plane"></i> 목표 금액 지급 요청서(계좌) 보내달라고 하기
                         </button>
                         </div>
                 </div>`;
