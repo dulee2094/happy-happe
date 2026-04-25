@@ -1,0 +1,148 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\SAMSUNG\\OneDrive\\諛뷀깢 ?붾㈃\\?⑹쓽 ?덊럹?댁?\\playwright.config.js",
+    "rootDir": "C:/Users/SAMSUNG/OneDrive/諛뷀깢 ?붾㈃/?⑹쓽 ?덊럹?댁?/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/SAMSUNG/OneDrive/諛뷀깢 ?붾㈃/?⑹쓽 ?덊럹?댁?/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/SAMSUNG/OneDrive/諛뷀깢 ?붾㈃/?⑹쓽 ?덊럹?댁?/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "blind_proposal.spec.js",
+      "file": "blind_proposal.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "釉붾씪?몃뱶 ?⑹쓽 ?쒕굹由ъ삤 ?먮룞 ?뚯뒪??,
+          "file": "blind_proposal.spec.js",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. 怨꾩젙 ?뺤씤/?앹꽦 諛?諛?議곗씤 ??1?쇱슫???쒖븞 ?뚯뒪??,
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30463,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\SAMSUNG\\OneDrive\\諛뷀깢 ?붾㈃\\?⑹쓽 ?덊럹?댁?\\tests\\blind_proposal.spec.js",
+                            "column": 24,
+                            "line": 38
+                          },
+                          "message": "Error: page.waitForTimeout: Test ended.\n\n  36 |             await page.fill('#loginPw', user.pw);\n  37 |             await page.click('button[type=\"submit\"]');\n> 38 |             await page.waitForTimeout(2000);\n     |                        ^\n  39 |         }\n  40 |         await doLogin(attackerPage, ATTACKER);\n  41 |         await doLogin(victimPage, VICTIM);\n    at doLogin (C:\\Users\\SAMSUNG\\OneDrive\\諛뷀깢 ?붾㈃\\?⑹쓽 ?덊럹?댁?\\tests\\blind_proposal.spec.js:38:24)\n    at C:\\Users\\SAMSUNG\\OneDrive\\諛뷀깢 ?붾㈃\\?⑹쓽 ?덊럹?댁?\\tests\\blind_proposal.spec.js:41:9"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-17T12:31:48.946Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\SAMSUNG\\OneDrive\\諛뷀깢 ?붾㈃\\?⑹쓽 ?덊럹?댁?\\test-results\\blind_proposal-釉붾씪?몃뱶-?⑹쓽-?쒕굹由?94bef--?뺤씤-?앹꽦-諛?諛?議곗씤-??1?쇱슫???쒖븞-?뚯뒪??chromium\\test-failed-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\SAMSUNG\\OneDrive\\諛뷀깢 ?붾㈃\\?⑹쓽 ?덊럹?댁?\\test-results\\blind_proposal-釉붾씪?몃뱶-?⑹쓽-?쒕굹由?94bef--?뺤씤-?앹꽦-諛?諛?議곗씤-??1?쇱슫???쒖븞-?뚯뒪??chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\SAMSUNG\\OneDrive\\諛뷀깢 ?붾㈃\\?⑹쓽 ?덊럹?댁?\\test-results\\blind_proposal-釉붾씪?몃뱶-?⑹쓽-?쒕굹由?94bef--?뺤씤-?앹꽦-諛?諛?議곗씤-??1?쇱슫???쒖븞-?뚯뒪??chromium\\error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e01ef2e8df61248bcb87-b2f0344c6995211ca2be",
+              "file": "blind_proposal.spec.js",
+              "line": 10,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-17T12:31:47.115Z",
+    "duration": 33576.568,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

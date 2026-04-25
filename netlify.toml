@@ -1,0 +1,24 @@
+# Netlify Deployment Configuration
+# This file tells Netlify how to build and deploy the site.
+
+[build]
+  # Set the base directory to 'deploy'.
+  # This serves two purposes:
+  # 1. It points Netlify to the folder containing only the static files we want to serve.
+  # 2. It isolates the build from the root 'package.json', preventing 'npm install' and the associated 'extensions' error.
+  base = "deploy"
+
+  # Publish the current directory (which is 'deploy' because of the base setting above).
+  publish = "."
+
+  # Dummy build command. Since we are serving static files, we don't need a build step.
+  # This overrides any default behavior.
+  command = "echo 'Static Site - No Build Needed'"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"

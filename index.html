@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeHappE - 형사사건 비대면 안전 합의 플랫폼</title>
+    <meta name="description" content="피해자와 피의자 모두를 위한 안전하고 공정한 비대면 합의 플랫폼. 익명성 보장, 에스크로 안전 결제, 법률 데이터 기반 합의금 산정.">
+
+    <!-- Google Analytics GA4 -->
+    <!-- ⚠️ 아래 G-XXXXXXXXXX를 실제 Google Analytics 측정 ID로 교체하세요 -->
+    <!-- 발급 방법: analytics.google.com → 관리 → 데이터 스트림 → 측정 ID 복사 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-grid">
+                    <span class="logo-row-en logo-en-left">Safe</span>
+                    <span class="logo-row-en logo-en-right">HappE.</span>
+                    <span class="logo-row-kr logo-kr-left">세이프</span>
+                    <span class="logo-row-kr logo-kr-right">합의</span>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#features">서비스 소개</a></li>
+                    <li><a href="#process">이용 절차</a></li>
+                    <!-- <li><a href="#faq">자주 묻는 질문</a></li> -->
+                </ul>
+            </nav>
+            <div class="auth-buttons" style="display: none;">
+                <!-- Login button moved to main hero section -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="glow-bg"></div>
+        <div class="glow-bg-2"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        상처 없는 합의,<br>
+                        <span class="highlight">블라인드 제안</span>으로 더 가까이
+                    </h1>
+                    <p>
+                        서로의 희망 금액은 숨긴 채, 시스템이 격차를 분석해 드립니다.<br>
+                        눈치 보지 말고 소신껏 제안하고, 스트레스 없이 합의점을 찾으세요.
+                    </p>
+                    <div class="hero-cta">
+                        <!-- Buttons removed as per request -->
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <!-- Central Login Card -->
+                    <div class="glass-card login-card"
+                        style="padding: 40px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; margin: 0 auto; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
+                        <h3 style="text-align: center; margin-bottom: 25px; font-size: 1.5rem;">로그인</h3>
+                        <form id="heroLoginForm" onsubmit="handleHeroLogin(event)">
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label
+                                    style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">이메일</label>
+                                <input type="email" id="heroEmail" class="form-input"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;"
+                                    placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 30px;">
+                                <label
+                                    style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">비밀번호</label>
+                                <input type="password" id="heroPassword" class="form-input"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;"
+                                    placeholder="비밀번호 입력" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 20px;">로그인</button>
+
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                                <a href="#" style="color: var(--text-muted); text-decoration: none;">비밀번호 찾기</a>
+                                <a href="login.html"
+                                    style="color: var(--secondary); text-decoration: none; font-weight: 600;">회원가입</a>
+                            </div>
+
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="color: var(--text-muted); font-size: 0.9rem;">또는</span>
+                            </div>
+
+                            <button type="button" class="btn" onclick="handleGuestLogin()"
+                                style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 10px; background: rgba(74, 158, 255, 0.15); color: #7bbaff; border: 1px solid rgba(74, 158, 255, 0.4); font-weight: 600;">
+                                <i class="fas fa-eye" style="margin-right:8px;"></i> 가입 없이 체험하기 (둘러보기)
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>왜 SafeHappE 인가요?</h2>
+                <p>불필요한 감정 소모는 줄이고, 합의의 본질에만 집중하세요.</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1: Blind Proposal (Key Feature) -->
+                <div class="glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>합리적인 블라인드 제안</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        직접적인 금액 흥정으로 인한 감정 소모를 막습니다. 서로 비공개로 희망액을 제안하면, 시스템이 격차를 좁혀가도록 중재합니다.
+                    </p>
+                </div>
+
+                <!-- Feature 2: Safe Communication -> Record Keeping -->
+                <div class="glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>투명한 소통과 안전한 기록 보관</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        모든 대화 내용은 안전하게 저장되어, 만약의 상황에 증빙 자료로 활용할 수 있습니다. 감정적인 분쟁 대신 이성적인 기록을 남기세요.
+                    </p>
+                </div>
+
+                <!-- Feature 3: Electronic Signature -> Legal Finality -->
+                <div class="glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>법적 분쟁을 끝내는 완벽한 합의서</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        합의 성사 즉시 변호사 검수를 거친 표준 양식의 합의서가 생성됩니다. 추후 발생할 수 있는 법적 시비를 원천 차단하고 사건을 깔끔하게 마무리하세요.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section (New) -->
+    <section id="process" class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>이용 절차</h2>
+                <p>복잡한 합의, SafeHappE에서는 4단계로 끝납니다.</p>
+            </div>
+
+            <div class="process-steps">
+                <!-- Step 1 -->
+                <div class="process-card has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">01</div>
+                    <div class="icon-box"><i class="fas fa-door-open"></i></div>
+                    <h3>방 개설 및 전달</h3>
+                    <div class="hint-text">ⓘ 과정 살펴보기</div>
+                    <div class="process-tooltip">
+                        "방장이 되어 [합의방 만들기]를 누르고 사건을 접수합니다. 방이 생성되며 발급되는 '고유 초대코드'를 상대방에게 문자 등으로 전달하세요. 내 개인 연락처 노출 없이 즉시 대화 공간이 열립니다."
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <!-- Step 2 -->
+                <div class="process-card has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">02</div>
+                    <div class="icon-box"><i class="fas fa-comments"></i></div>
+                    <h3>비공개 소통</h3>
+                    <div class="hint-text">ⓘ 과정 살펴보기</div>
+                    <div class="process-tooltip">
+                        "양측이 입장하면 오직 두 사람만의 채팅 화면이 열립니다. 합의금을 논의하기 전, 채팅으로 이성적인 대화를 나누고 [사과문 작성] 등 양식에 맞춰 문서를 안전하게 교환할 수 있습니다."
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <!-- Step 3 -->
+                <div class="process-card highlight-step has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">03</div>
+                    <div class="icon-box"><i class="fas fa-sliders-h"></i></div>
+                    <h3>블라인드 제안</h3>
+                    <div class="hint-text" style="color:var(--text-main); font-weight:bold;">ⓘ 과정 살펴보기</div>
+                    <div class="process-tooltip">
+                        "본격적인 합의에 들어가면 블라인드 금액 입력창이 뜹니다. 서로의 화면엔 보이지 않는 상태에서 낼 수 있는 최대/최소 금액을 입력하면, 시스템이 이를 수합해 안전하게 중간 합의점을 제시합니다."
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <!-- Step 4 -->
+                <div class="process-card has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">04</div>
+                    <div class="icon-box"><i class="fas fa-file-signature"></i></div>
+                    <h3>전자 서명 완료</h3>
+                    <div class="hint-text">ⓘ 과정 살펴보기</div>
+                    <div class="process-tooltip">
+                        "도출된 금액에 양측이 [동의하기]를 완료하면, 기성 표준 합의서 PDF가 나타납니다. 스마트폰이나 마우스로 각자 전자서명을 마치면 효력이 완성되며 모든 절차가 분쟁 없이 종료됩니다."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Minimal for MVP) -->
+    <footer style="padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+        <div class="container">
+            <!-- 핵심 필수 링크 -->
+            <div style="margin-bottom: 20px;">
+                <a href="#" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">이용약관</a>
+                <span style="color: rgba(255,255,255,0.2);">|</span>
+                <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px; font-weight: 600;">개인정보처리방침</a>
+            </div>
+            
+            <!-- 최소한의 운영/연락 정보 -->
+            <div style="line-height: 1.6; margin-bottom: 20px; color: rgba(255,255,255,0.4);">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #fff;">SafeHappE</span><br>
+                Contact: dulee2094@naver.com
+            </div>
+            
+            <!-- 저작권 -->
+            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.3);">
+                &copy; 2026 SafeHappE. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Welcome Modal (Founder's Letter) -->
+    <div id="welcomeModal" class="welcome-modal-overlay">
+        <div class="welcome-modal-content">
+            <div class="modal-header">
+                <h3>SafeHappE를 찾아주신 분들께 드리는 글</h3>
+                <button class="close-modal-btn" onclick="closeWelcomeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    오랫동안 수많은 형사 사건을 다루어 오면서 가장 큰 안타까움을 느꼈던 순간이 있습니다. 바로 양측 모두 원만하게 합의할 의사가 있음에도 불구하고, 직접 대면하거나 연락을 주고받는 과정에서 발생하는 <strong>'감정적 상처'</strong>와 <strong>'모욕감'</strong> 때문에 합의가 결렬되는 경우였습니다.
+                </p>
+                <p>
+                    '서로 만나거나 입씨름하지 않고 오직 합의 조건에만 집중할 수 있다면 불필요한 감정 소모를 막을 수 있지 않을까?'<br>
+                    이러한 고민 끝에, 희망 금액을 직접 입에 올리는 껄끄러움 없이 시스템이 조율을 돕는 <strong>'블라인드 합의 시스템'</strong>을 기획하게 되었습니다. 부디 이 공간이 여러분이 겪고 계신 힘든 분쟁을 더 이상의 상처 없이 원만하게 매듭짓는 작은 도구가 되기를 진심으로 바랍니다.
+                </p>
+                <div class="beta-notice">
+                    <p class="notice-title"><i class="fas fa-info-circle"></i> 알려드립니다</p>
+                    <p style="color:var(--text-main);">현재 SafeHappE는 더 나은 서비스를 만들기 위해 <strong>베타(Beta) 서비스</strong>로 운영 중입니다. 이용 중 발생하는 오류나 제안하고 싶으신 점이 있다면 언제든 아래 이메일로 연락 부탁드립니다.</p>
+                    <p class="contact-email">✉️ 의견 보내기: <strong>dulee2094@naver.com</strong></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <label class="dont-show-again">
+                    <input type="checkbox" id="dontShowToday"> 오늘 하루 보지 않기
+                </label>
+                <button class="btn btn-primary" onclick="closeWelcomeModal()" style="padding: 8px 25px;">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Inline script to handle Hero Login
+        async function handleHeroLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('heroEmail').value;
+            const password = document.getElementById('heroPassword').value;
+
+            // Basic validation
+            if (!email || !password) {
+                alert('이메일과 비밀번호를 입력해주세요.');
+                return;
+            }
+
+            // API 설정
+            const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const isJson = res.headers.get('content-type')?.includes('application/json');
+                const data = isJson ? await res.json() : null;
+
+                if (res.ok && data && data.success) {
+                    localStorage.setItem('user_id', data.userId);
+                    localStorage.setItem('user_name', data.name);
+                    localStorage.removeItem('is_guest'); // 핵심: 진짜 회원 로그인 시 게스트 모드 해제
+                    alert(`${data.name}님 환영합니다!`);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    const errorMsg = (data && data.error) ? data.error : '이메일 또는 비밀번호를 확인해주세요.';
+                    alert(`로그인 실패: ${errorMsg}`);
+                }
+            } catch (err) {
+                console.error(err);
+                alert(`서버 연결 오류:\n${err.message}\n(서버 상태를 확인해주세요)`);
+            }
+        }
+
+        async function handleGuestLogin() {
+            const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/guest-login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem('user_id', data.userId);
+                    localStorage.setItem('user_name', data.name);
+                    localStorage.setItem('is_guest', 'true');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('둘러보기 요소를 준비하다가 문제가 생겼습니다: ' + data.error);
+                }
+            } catch (err) {
+                alert('서버 연결을 확인해주세요.');
+                console.error(err);
+            }
+        }
+
+        // Welcome Modal Logic & Visit Tracking
+        document.addEventListener('DOMContentLoaded', () => {
+            // Visit Tracking
+            const visitToken = localStorage.getItem('visit_token') || 'vtok_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('visit_token', visitToken);
+            
+            const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+            
+            fetch(`${API_BASE}/visit`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    sessionToken: visitToken, 
+                    pageUrl: window.location.pathname 
+                })
+            }).catch(e => console.error('Visit tracking failed', e));
+
+            const hideModalUntil = localStorage.getItem('hideWelcomeModalUntil');
+            const now = new Date().getTime();
+            
+            // 만약 숨김 처리되지 않았거나 숨김 시간이 지났으면 모달 표시
+            if (!hideModalUntil || now > parseInt(hideModalUntil)) {
+                setTimeout(() => {
+                    const modal = document.getElementById('welcomeModal');
+                    if (modal) {
+                        modal.classList.add('show');
+                        
+                        // 배경(오버레이) 클릭 시 닫기 기능 추가
+                        modal.addEventListener('click', (e) => {
+                            if (e.target === modal) {
+                                closeWelcomeModal();
+                            }
+                        });
+                    }
+                }, 500); // 0.5초 뒤 부드럽게 등장
+            }
+        });
+
+        function closeWelcomeModal() {
+            const dontShow = document.getElementById('dontShowToday').checked;
+            if (dontShow) {
+                // 24시간(밀리초) 동안 숨김
+                const hideUntil = new Date().getTime() + (24 * 60 * 60 * 1000);
+                localStorage.setItem('hideWelcomeModalUntil', hideUntil);
+            }
+            document.getElementById('welcomeModal').classList.remove('show');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - SafeHappE</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <section class="hero" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="glow-bg"></div>
+
+        <div class="auth-box glass-card">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <a href="index.html" class="logo" style="text-decoration: none;">
+                    <div class="logo-grid">
+                        <span class="logo-row-en logo-en-left">Safe</span>
+                        <span class="logo-row-en logo-en-right">HappE.</span>
+                        <span class="logo-row-kr logo-kr-left">세이프</span>
+                        <span class="logo-row-kr logo-kr-right">합의</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted);">안전한 비대면 합의의 시작</p>
+            </div>
+
+            <!-- Auth Forms -->
+            <div id="loginForm">
+                <form id="actualLoginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <input type="email" id="loginEmail" class="form-input" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">비밀번호</label>
+                        <input type="password" id="loginPw" class="form-input" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">로그인</button>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); text-align: center; line-height: 1.6;">
+                        계정이 없으신가요? <span onclick="toggleMode('signup')" style="color: var(--secondary); cursor: pointer; font-weight: 600;">회원가입</span><br>
+                        비밀번호를 잊으셨나요? <span onclick="toggleMode('forgot')" style="color: var(--primary); cursor: pointer; font-weight: 600;">비밀번호 찾기</span>
+                    </div>
+                </form>
+
+                <!-- Signup Form (Hidden initially) -->
+                <form id="signupForm" onsubmit="handleSignup(event)" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label">이름</label>
+                        <input type="text" id="regName" class="form-input" placeholder="홍길동" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">휴대폰 번호 (선택)</label>
+                        <input type="tel" id="regPhone" class="form-input" placeholder="01012345678">
+                        <small style="color: var(--text-muted); font-size: 0.8rem;">* 합의 요청 문자를 받으시려면 입력해주세요.</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <input type="email" id="regEmail" class="form-input" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">비밀번호</label>
+                        <input type="password" id="regPw" class="form-input" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; margin-top: 10px; background: var(--secondary);">가입하기</button>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); text-align: center;">
+                        이미 계정이 있으신가요? <span onclick="toggleMode('login')"
+                            style="color: var(--primary); cursor: pointer; font-weight: 600;">로그인</span>
+                    </p>
+                </form>
+
+                <!-- Forgot Password Form (Hidden initially) -->
+                <form id="forgotPasswordForm" onsubmit="handleForgotPassword(event)" style="display: none;">
+                    <div style="margin-bottom: 20px;">
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">가입하신 이메일을 입력하시면 임시 비밀번호를 발급해 드립니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <input type="email" id="forgotEmail" class="form-input" placeholder="example@email.com" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">임시 비밀번호 발급</button>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); text-align: center;">
+                        <span onclick="toggleMode('login')" style="color: var(--primary); cursor: pointer; font-weight: 600;">로그인으로 돌아가기</span>
+                    </p>
+                </form>
+
+                <div class="divider">
+                    <span>또는</span>
+                </div>
+
+                <button type="button" class="social-btn" onclick="handleGuestLogin()" style="margin-bottom: 10px; background: rgba(74, 158, 255, 0.15); color: #7bbaff; border: 1px solid rgba(74, 158, 255, 0.4); font-weight: 600;">
+                    <i class="fas fa-eye" style="margin-right:8px;"></i> 가입 없이 체험하기 (둘러보기)
+                </button>
+
+                <button type="button" class="social-btn"><i class="fas fa-comment" style="margin-right:8px; color: #FEE500;"></i> 카카오로 시작하기 (준비중)</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // API 설정
+        const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+
+        // 배포 시 정식 모드
+        const DEMO_MODE = false;
+
+        if (DEMO_MODE) {
+            console.log('🎭 데모 모드로 실행 중 (백엔드 없음)');
+        } else {
+            console.log('🚀 정식 모드로 실행 중 (DB 저장)');
+        }
+
+        function toggleMode(mode) {
+            const forms = {
+                login: document.getElementById('actualLoginForm'),
+                signup: document.getElementById('signupForm'),
+                forgot: document.getElementById('forgotPasswordForm')
+            };
+
+            for (const key in forms) {
+                if (forms[key]) forms[key].style.display = (key === mode) ? 'block' : 'none';
+            }
+        }
+
+        // 1. Handle Signup
+        async function handleSignup(e) {
+            e.preventDefault();
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPw').value;
+            const name = document.getElementById('regName').value;
+            const phoneNumber = document.getElementById('regPhone').value;
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, name, phoneNumber })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    alert('가입이 완료되었습니다! 로그인해주세요.');
+                    toggleMode('login'); // Switch to login
+                } else {
+                    alert('가입 실패: ' + data.error);
+                }
+            } catch (err) {
+                alert('서버 연결 오류: ' + err.message);
+                console.error(err);
+            }
+        }
+
+        // 2. Handle Forgot Password
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value;
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/forgot-password`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    // 데모 버전: 이메일 발송 대신 화면에 직접 표시
+                    alert(`요청 성공!\n보안을 위해 실제론 이메일로 발송됩니다.\n임시 비밀번호: ${data.tempPassword}`);
+                    toggleMode('login');
+                } else {
+                    alert('실패: ' + data.error);
+                }
+            } catch (err) {
+                alert('서버 연결 오류');
+                console.error(err);
+            }
+        }
+
+        // 3. Handle Guest Login
+        async function handleGuestLogin() {
+            try {
+                const res = await fetch(`${API_BASE}/auth/guest-login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem('user_id', data.userId);
+                    localStorage.setItem('user_name', data.name);
+                    localStorage.setItem('is_guest', 'true'); // Flag to restrict actions
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('둘러보기 요소를 준비하다가 문제가 생겼습니다: ' + data.error);
+                }
+            } catch (err) {
+                alert('서버 연결을 확인해주세요.');
+                console.error(err);
+            }
+        }
+
+        // 4. Handle Login
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPw').value;
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    // Save User Info
+                    localStorage.setItem('user_id', data.userId);
+                    localStorage.setItem('user_name', data.name);
+                    localStorage.removeItem('is_guest'); // 핵심: 진짜 회원 로그인 시 게스트 모드 해제
+
+                    alert(`${data.name}님 환영합니다!`);
+                    location.href = 'dashboard.html';
+                } else {
+                    alert('로그인 실패: 이메일 또는 비밀번호를 확인하세요.');
+                }
+            } catch (err) {
+                alert('서버 연결 오류. 서버가 실행 중인지 확인해주세요.');
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+
+</html>

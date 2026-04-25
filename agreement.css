@@ -1,0 +1,107 @@
+/* Agreement Page Specific Styles */
+.agreement-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.step {
+    width: 120px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.step.active {
+    color: var(--secondary);
+    font-weight: 700;
+}
+
+.step-line {
+    width: 50px;
+    height: 2px;
+    background: hsla(0, 0%, 100%, 0.1);
+}
+
+.two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+}
+
+@media (max-width: 900px) {
+    .two-column-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.document-viewer {
+    background: #525659;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    height: 600px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.paper-doc {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    /* A4 aspect somewhat */
+    min-height: 700px;
+    padding: 40px;
+    color: #333;
+    font-family: "Batang", serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    line-height: 1.8;
+}
+
+.doc-list li {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.doc-footer {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+}
+
+.method {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid hsla(0, 0%, 100%, 0.1);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.method:hover {
+    background: hsla(0, 0%, 100%, 0.05);
+}
+
+.method.selected {
+    border-color: var(--secondary);
+    color: var(--secondary);
+    background: hsla(170, 80%, 50%, 0.1);
+}
+
+.show-payment {
+    /* Styles for enabling/disabling payment card */
+}
+@keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } } .shake { animation: shake 0.3s ease-in-out; }

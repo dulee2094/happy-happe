@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - SafeHappE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: var(--bg-dark); }
+
+        .admin-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 44px 24px 80px;
+        }
+
+        /* ── Top Bar ── */
+        .admin-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 36px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .admin-topbar h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-badge {
+            background: rgba(255,80,80,0.15);
+            color: #ff6b6b;
+            border: 1px solid rgba(255,80,80,0.3);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── Login ── */
+        .login-card-admin {
+            max-width: 380px;
+            margin: 80px auto;
+            padding: 44px 36px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            text-align: center;
+        }
+        .login-card-admin .lock-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 18px;
+        }
+        .login-card-admin h3 {
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+        }
+        .login-card-admin .form-input {
+            margin-bottom: 14px;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Stats Row ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .stat-card-admin {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            padding: 20px 18px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+        .stat-card-admin:hover { border-color: rgba(255,255,255,0.15); }
+        .stat-card-admin .num {
+            font-size: 2.4rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-card-admin .label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* ── Tabs ── */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 4px;
+            width: fit-content;
+        }
+        .tab-btn {
+            padding: 9px 22px;
+            border-radius: 8px;
+            border: none;
+            background: none;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background: rgba(255,255,255,0.09);
+            color: var(--text-main);
+        }
+        .tab-btn i { margin-right: 6px; }
+
+        /* ── Table ── */
+        .table-wrap {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            overflow: hidden;
+            overflow-x: auto;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #fff;
+            min-width: 600px;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 13px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.025);
+        }
+        .data-table td {
+            padding: 13px 16px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            vertical-align: top;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background: rgba(255,255,255,0.025); }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.08);
+            color: var(--text-muted);
+        }
+        .badge-new {
+            background: rgba(74,222,128,0.15);
+            color: #4ade80;
+            border: 1px solid rgba(74,222,128,0.3);
+        }
+        .badge-pending {
+            background: rgba(251,191,36,0.12);
+            color: #fbbf24;
+        }
+
+        .empty-row td {
+            text-align: center;
+            padding: 55px !important;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .admin-topbar { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .tab-nav { width: 100%; }
+            .tab-btn { flex: 1; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-wrapper">
+
+        <!-- Top Bar -->
+        <div class="admin-topbar">
+            <h1>
+                <i class="fas fa-user-shield" style="color: var(--primary);"></i>
+                관리자 대시보드
+                <span class="admin-badge">ADMIN ONLY</span>
+            </h1>
+            <button class="btn btn-glass" onclick="location.href='index.html'">
+                <i class="fas fa-home" style="margin-right:6px;"></i> 메인으로
+            </button>
+        </div>
+
+        <!-- Login Section -->
+        <div id="loginSection" class="login-card-admin">
+            <i class="fas fa-lock lock-icon"></i>
+            <h3>관리자 인증</h3>
+            <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:20px;">
+                관리자 전용 페이지입니다.<br>인가된 키를 입력해 주세요.
+            </p>
+            <input type="password" id="adminKey" class="form-input"
+                placeholder="관리자 키 입력"
+                onkeydown="if(event.key==='Enter') loadAllData()">
+            <button class="btn btn-primary" onclick="loadAllData()"
+                style="width:100%; padding:13px; font-size:1rem;">
+                <i class="fas fa-sign-in-alt" style="margin-right:6px;"></i> 확인
+            </button>
+        </div>
+
+        <!-- Data Section -->
+        <div id="dataSection" style="display:none;">
+
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card-admin">
+                    <div class="num" id="statVisits" style="color: #c084fc;">-</div>
+                    <div class="label"><i class="fas fa-eye" style="margin-right:5px;"></i>누적 방문자 수</div>
+                </div>
+                <div class="stat-card-admin">
+                    <div class="num" id="statConsult" style="color: var(--secondary);">-</div>
+                    <div class="label"><i class="fas fa-headset" style="margin-right:5px;"></i>총 상담 신청</div>
+                </div>
+                <div class="stat-card-admin">
+                    <div class="num" id="statUsers" style="color: var(--primary);">-</div>
+                    <div class="label"><i class="fas fa-users" style="margin-right:5px;"></i>총 가입 회원</div>
+                </div>
+                <div class="stat-card-admin">
+                    <div class="num" id="statNewUsers" style="color: #4ade80;">-</div>
+                    <div class="label"><i class="fas fa-user-plus" style="margin-right:5px;"></i>신규 가입(7일)</div>
+                </div>
+            </div>
+
+            <!-- Tab Nav -->
+            <div class="tab-nav">
+                <button class="tab-btn active" id="tabBtn-consultations"
+                    onclick="switchTab('consultations')">
+                    <i class="fas fa-headset"></i>상담 신청 내역
+                </button>
+                <button class="tab-btn" id="tabBtn-users"
+                    onclick="switchTab('users')">
+                    <i class="fas fa-users"></i>가입 회원 목록
+                </button>
+                <button class="tab-btn" id="tabBtn-visits"
+                    onclick="switchTab('visits')">
+                    <i class="fas fa-chart-line"></i>방문자 상세 통계
+                </button>
+            </div>
+
+            <!-- Tab 1: Consultations -->
+            <div id="tab-consultations">
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>신청일시</th>
+                                <th>신청인</th>
+                                <th>전화번호</th>
+                                <th>상담 내용</th>
+                                <th>상태</th>
+                            </tr>
+                        </thead>
+                        <tbody id="consultTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 2: Users -->
+            <div id="tab-users" style="display:none;">
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>가입일시</th>
+                                <th>이름</th>
+                                <th>이메일</th>
+                                <th>전화번호</th>
+                                <th>알림 수신</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 3: Visits -->
+            <div id="tab-visits" style="display:none;">
+                <div style="background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; margin-bottom: 24px;">
+                    <h3 style="margin-top:0; margin-bottom: 20px; font-size:1.1rem;"><i class="fas fa-calendar-alt" style="margin-right:8px; color:var(--primary);"></i>최근 7일 일별 방문자 추이</h3>
+                    <div style="position: relative; height:300px; width:100%">
+                        <canvas id="visitsChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="stats-row" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="stat-card-admin" style="padding: 30px;">
+                        <div class="num" id="statVisitsToday" style="color: #4ade80; font-size: 3rem;">0</div>
+                        <div class="label" style="font-size: 1rem; margin-top:10px;">오늘 방문자 수</div>
+                    </div>
+                    <div class="stat-card-admin" style="padding: 30px;">
+                        <div class="num" id="statVisitsWeek" style="color: #38bdf8; font-size: 3rem;">0</div>
+                        <div class="label" style="font-size: 1rem; margin-top:10px;">최근 7일 방분자 수</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /dataSection -->
+    </div>
+
+    <script>
+        let visitsChartInstance = null;
+
+        async function loadAllData() {
+            const key = document.getElementById('adminKey').value.trim();
+            if (!key) return alert('관리자 키를 입력해주세요.');
+
+            try {
+                const [consultRes, usersRes, visitsRes] = await Promise.all([
+                    fetch(`/api/admin/consultations?adminKey=${key}`),
+                    fetch(`/api/admin/users?adminKey=${key}`),
+                    fetch(`/api/admin/visits?adminKey=${key}`)
+                ]);
+
+                const consultData = await consultRes.json();
+                const usersData  = await usersRes.json();
+                const visitsData = await visitsRes.json();
+
+                if (!consultData.success) {
+                    return alert('접근 권한이 없습니다. 관리자 키를 확인하세요.');
+                }
+
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dataSection').style.display  = 'block';
+
+                // Stats
+                const consultList = consultData.list || [];
+                const userList    = usersData.success ? usersData.list : [];
+                const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+                const newUsers = userList.filter(u => new Date(u.createdAt).getTime() > sevenDaysAgo);
+
+                document.getElementById('statConsult').textContent  = consultList.length;
+                document.getElementById('statUsers').textContent    = userList.length;
+                document.getElementById('statNewUsers').textContent = newUsers.length;
+                
+                if (visitsData.success) {
+                    document.getElementById('statVisits').textContent = visitsData.totalVisits;
+                    document.getElementById('statVisitsToday').textContent = visitsData.todayVisits;
+                    document.getElementById('statVisitsWeek').textContent = visitsData.weeklyVisits;
+                    renderVisitsChart(visitsData.dailyStats);
+                }
+
+                renderConsultations(consultList);
+                renderUsers(userList);
+
+            } catch (e) {
+                console.error(e);
+                alert('데이터를 불러오지 못했습니다. 서버 연결을 확인해주세요.');
+            }
+        }
+
+        function switchTab(tab) {
+            ['consultations', 'users', 'visits'].forEach(t => {
+                const tabEl = document.getElementById(`tab-${t}`);
+                if (tabEl) tabEl.style.display = t === tab ? 'block' : 'none';
+                
+                const btnEl = document.getElementById(`tabBtn-${t}`);
+                if (btnEl) btnEl.classList.toggle('active', t === tab);
+            });
+        }
+
+        function renderConsultations(list) {
+            const tbody = document.getElementById('consultTableBody');
+            if (!list.length) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">📭 상담 신청 내역이 없습니다.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = list.map(item => {
+                const date = new Date(item.submittedAt).toLocaleString('ko-KR');
+                return `
+                    <tr>
+                        <td style="white-space:nowrap; font-size:0.82rem;">${date}</td>
+                        <td><strong>${item.name || '-'}</strong></td>
+                        <td style="white-space:nowrap;">${item.phoneNumber}</td>
+                        <td>
+                            <div style="font-weight:600; margin-bottom:5px; color:var(--text-main);">[요지] ${item.summary}</div>
+                            <div style="font-size:0.84rem; color:#aaa; line-height:1.5;">${item.details}</div>
+                        </td>
+                        <td><span class="badge badge-pending">${item.status}</span></td>
+                    </tr>`;
+            }).join('');
+        }
+
+        function renderUsers(list) {
+            const tbody = document.getElementById('usersTableBody');
+            if (!list.length) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">👤 가입 회원이 없습니다.</td></tr>';
+                return;
+            }
+            const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+            tbody.innerHTML = list.map(user => {
+                const date  = new Date(user.createdAt).toLocaleString('ko-KR');
+                const isNew = new Date(user.createdAt).getTime() > sevenDaysAgo;
+                return `
+                    <tr>
+                        <td style="white-space:nowrap; font-size:0.82rem;">
+                            ${date}
+                            ${isNew ? '<span class="badge badge-new" style="margin-left:6px;">NEW</span>' : ''}
+                        </td>
+                        <td><strong>${user.name}</strong></td>
+                        <td>${user.email}</td>
+                        <td>${user.phoneNumber || '-'}</td>
+                        <td>${user.messageNotification
+                            ? '<span style="color:#4ade80;">✅ 수신</span>'
+                            : '<span style="color:#aaa;">❌ 거부</span>'}</td>
+                    </tr>`;
+            }).join('');
+        }
+
+        function renderVisitsChart(dailyStats) {
+            if (!dailyStats || dailyStats.length === 0) return;
+            
+            const ctx = document.getElementById('visitsChart').getContext('2d');
+            
+            if (visitsChartInstance) {
+                visitsChartInstance.destroy();
+            }
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(192, 132, 252, 0.4)');
+            gradient.addColorStop(1, 'rgba(192, 132, 252, 0.0)');
+
+            visitsChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dailyStats.map(d => d.date),
+                    datasets: [{
+                        label: '일별 방문자',
+                        data: dailyStats.map(d => d.count),
+                        borderColor: '#c084fc',
+                        backgroundColor: gradient,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#c084fc',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#aaa' }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#aaa', stepSize: 1 }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

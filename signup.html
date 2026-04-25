@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - SafeHappE</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <section class="hero" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="glow-bg"></div>
+
+        <div class="auth-box glass-card">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <a href="index.html" class="logo" style="text-decoration: none;">
+                    <div class="logo-grid">
+                        <span class="logo-row-en logo-en-left">Safe</span>
+                        <span class="logo-row-en logo-en-right">HappE.</span>
+                        <span class="logo-row-kr logo-kr-left">세이프</span>
+                        <span class="logo-row-kr logo-kr-right">합의</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted); margin-top: 10px;">안전한 합의를 위한 첫 걸음</p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupArea">
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label class="form-label">이름</label>
+                        <input type="text" id="regName" class="form-input" placeholder="홍길동" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">휴대폰 번호 (선택)</label>
+                        <input type="tel" id="regPhone" class="form-input" placeholder="01012345678">
+                        <small style="color: var(--text-muted); font-size: 0.8rem;">* 합의 요청 알림을 위해 권장됩니다.</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <input type="email" id="regEmail" class="form-input" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">비밀번호</label>
+                        <input type="password" id="regPw" class="form-input" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; margin-top: 10px; background: var(--secondary);">가입하기</button>
+
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                        이미 계정이 있으신가요?
+                        <a href="login.html"
+                            style="color: var(--primary); font-weight: 600; text-decoration: none;">로그인</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+
+        async function handleSignup(e) {
+            e.preventDefault();
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPw').value;
+            const name = document.getElementById('regName').value;
+            const phoneNumber = document.getElementById('regPhone').value;
+
+            // Simple validation
+            if (!email || !password || !name) {
+                alert('필수 정보를 모두 입력해주세요.');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, name, phoneNumber })
+                });
+
+                const isJson = res.headers.get('content-type')?.includes('application/json');
+                const data = isJson ? await res.json() : null;
+
+                if (res.ok && data && data.success) {
+                    alert('가입이 완료되었습니다! 로그인 페이지로 이동합니다.');
+                    window.location.href = 'login.html';
+                } else {
+                    // Handle non-200 or failure
+                    const errorMsg = (data && data.error)
+                        ? data.error
+                        : (isJson ? JSON.stringify(data) : await res.text());
+
+                    console.error('Signup Error:', res.status, errorMsg);
+                    alert(`가입 실패 (${res.status}):\n${errorMsg.substring(0, 100)}`);
+                }
+            } catch (err) {
+                console.error(err);
+                alert(`서버 연결 차단됨 또는 네트워크 오류:\n${err.message}\n\n서버가 켜져 있는지 확인해주세요.`);
+            }
+        }
+    </script>
+</body>
+
+</html>
