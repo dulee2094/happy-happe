@@ -170,6 +170,7 @@ router.get('/status', async (req, res) => {
                     roomCode: r.roomCode,
                     topic: r.topic,
                     status: r.status,
+                    connectionStatus: r.connectionStatus,
                     myRole: r.partyAId == userId ? 'partyA' : 'partyB',
                     counterpartyName,
                     createdAt: r.createdAt

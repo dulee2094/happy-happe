@@ -24,20 +24,21 @@ window.createCaseCard = function (caseItem) {
     card.className = 'glass-card';
     card.style.cursor = 'pointer';
     card.style.transition = 'all 0.3s';
-    card.style.borderLeft = '4px solid ' + getStatusColor(caseItem.connectionStatus);
+    
+    // Fallback to 'status' if 'connectionStatus' is missing (due to Room refactor)
+    const connStatus = caseItem.connectionStatus || caseItem.status || 'pending';
+    
+    card.style.borderLeft = '4px solid ' + getStatusColor(connStatus);
 
     card.onclick = () => {
         window.openCaseDetail(
-            caseItem.caseId,
-            caseItem.caseNumber,
+            caseItem.id || caseItem.caseId,
+            caseItem.roomCode || caseItem.caseNumber,
             caseItem.myRole,
-            caseItem.connectionStatus,
+            connStatus,
             caseItem.counterpartyName,
-            caseItem.registrationDate,
-            caseItem.roomTitle,
-            caseItem.summary,
-            caseItem.apologyStatus,
-            caseItem.apologyContent
+            caseItem.createdAt || caseItem.registrationDate,
+            caseItem.topic || caseItem.roomTitle
         );
     };
 
@@ -50,20 +51,22 @@ window.createCaseCard = function (caseItem) {
         card.style.boxShadow = '';
     };
 
-    const statusBadge = getStatusBadge(caseItem.connectionStatus);
+    const statusBadge = getStatusBadge(connStatus);
     const roleIcon = caseItem.myRole === 'partyA' ? 'fa-user-tie' : 'fa-user-shield';
     const roleText = caseItem.myRole === 'partyA' ? '제안자' : '참여자';
 
-    let displayTitle = caseItem.roomTitle || caseItem.summary || caseItem.caseNumber;
+    let displayTitle = caseItem.topic || caseItem.roomTitle || caseItem.summary || caseItem.roomCode || caseItem.caseNumber || '제목 없음';
     let subTitle = '';
 
-    if (caseItem.topic) {
+    if (caseItem.roomCode) {
         subTitle = `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal; margin-left: 8px;">Ref: ${caseItem.roomCode}</span>`;
-    } else if (displayTitle !== caseItem.roomCode) {
-        subTitle = `<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal; margin-left: 8px;">${caseItem.roomCode}</span>`;
     }
 
-    if (displayTitle.length > 25) displayTitle = displayTitle.substring(0, 25) + '...';
+    if (displayTitle && displayTitle.length > 25) {
+        displayTitle = displayTitle.substring(0, 25) + '...';
+    }
+
+    const regDate = caseItem.createdAt ? new Date(caseItem.createdAt).toLocaleDateString() : (caseItem.registrationDate || '2024.01.01');
 
     card.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
@@ -78,15 +81,15 @@ window.createCaseCard = function (caseItem) {
         </div>
         <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px;">
             <div style="width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-user-friends" style="font-size: 1.2rem; color: ${getStatusColor(caseItem.connectionStatus)};"></i>
+                <i class="fas fa-user-friends" style="font-size: 1.2rem; color: ${getStatusColor(connStatus)};"></i>
             </div>
             <div style="flex: 1;">
                 <div style="font-size: 0.8rem; color: var(--text-muted);">협상 상대방</div>
-                <div style="font-weight: 600; font-size: 1rem;">${caseItem.counterpartyName}</div>
+                <div style="font-weight: 600; font-size: 1rem;">${caseItem.counterpartyName || '대기 중'}</div>
             </div>
             <div style="text-align: right; margin-right: 15px;">
                     <div style="font-size: 0.8rem; color: var(--text-muted);">등록일</div>
-                    <div style="font-size: 0.9rem;">${caseItem.registrationDate || '2024.01.01'}</div>
+                    <div style="font-size: 0.9rem;">${regDate}</div>
             </div>
             <i class="fas fa-chevron-right" style="color: var(--text-muted); font-size: 1.2rem;"></i>
         </div>
