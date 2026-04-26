@@ -93,7 +93,7 @@ window.sendPaymentRequest = async function (amount) {
                 alert("⚠️ 주의: 지급 요청서는 발송되었으나, '서류 공유함' 자동 저장은 실패했습니다.");
             }
 
-            alert("📨 [발송 완료]\n상대방에게 합의금 지급 요청서가 전달되었습니다.");
+            alert("📨 [발송 완료]\n상대방에게 목표 금액 지급 요청서가 전달되었습니다.");
             if (window.loadPaymentRequestStatus) window.loadPaymentRequestStatus();
         } else {
             alert("발송 실패: " + data.error);
@@ -140,14 +140,14 @@ window.downloadPaymentRequest = function (elementId) {
 
     html2canvas(element, { scale: 2 }).then(canvas => {
         const link = document.createElement('a');
-        link.download = '합의금_지급_요청서.png';
+        link.download = '목표 금액_지급_요청서.png';
         link.href = canvas.toDataURL();
         link.click();
     });
 };
 
 window.requestAccountInfo = function () {
-    if (!confirm("피해자에게 합의금 지급 요청서(계좌 정보) 작성을 요청하시겠습니까?")) return;
+    if (!confirm("상대방에게 목표 금액 지급 요청서(계좌 정보) 작성을 요청하시겠습니까?")) return;
     localStorage.setItem('account_requested_by_offender', 'true');
     alert("🔔 상대방에게 요청 알림을 보냈습니다.");
     location.reload();

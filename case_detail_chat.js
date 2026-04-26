@@ -17,7 +17,7 @@ window.getChatHTML = function () {
                 </div>
                 <h3 style="margin-bottom: 15px;">안심 채팅 서비스</h3>
                 <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 30px;">
-                    피의자와 피해자가 개인 연락처 노출 없이<br>
+                    제안자와 상대방가 개인 연락처 노출 없이<br>
                     안전하게 대화할 수 있는 공간입니다.<br><br>
                     <span style="color: #4ade80; font-size: 0.9rem; background: rgba(74, 222, 128, 0.1); padding: 5px 10px; border-radius: 20px;">
                         <i class="fas fa-check"></i> 상호 동의 필수

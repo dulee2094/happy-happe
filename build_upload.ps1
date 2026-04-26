@@ -1,26 +1,26 @@
-$src  = "c:\Users\SAMSUNG\OneDrive\바탕 화면\해피 합의"
-$dest = "c:\Users\SAMSUNG\OneDrive\바탕 화면\해피 합의\GITHUB_UPLOAD"
+$src  = $PSScriptRoot
+$dest = Join-Path $PSScriptRoot "GITHUB_UPLOAD"
 
 Write-Host "=== Rebuilding GITHUB_UPLOAD ===" -ForegroundColor Cyan
 
 if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
-New-Item -ItemType Directory -Path $dest | Out-Null
+mkdir $dest -Force | Out-Null
 
 function CopyFile($rel) {
     $s = Join-Path $src $rel
     $d = Join-Path $dest $rel
     $dir = Split-Path $d -Parent
-    if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
-    if (Test-Path $s) { Copy-Item -Path $s -Destination $d -Force; Write-Host "  [OK] $rel" }
+    if (-not (Test-Path -LiteralPath $dir)) { mkdir $dir -Force | Out-Null }
+    if (Test-Path -LiteralPath $s) { Copy-Item -LiteralPath $s -Destination $d -Force; Write-Host "  [OK] $rel" }
     else { Write-Host "  [SKIP] $rel" -ForegroundColor DarkGray }
 }
 
 function CopyDir($rel) {
     $s = Join-Path $src $rel
     $d = Join-Path $dest $rel
-    if (Test-Path $s) {
-        if (-not (Test-Path (Split-Path $d -Parent))) { New-Item -ItemType Directory -Path (Split-Path $d -Parent) -Force | Out-Null }
-        Copy-Item -Recurse -Force -Path $s -Destination $d
+    if (Test-Path -LiteralPath $s) {
+        if (-not (Test-Path -LiteralPath (Split-Path $d -Parent))) { mkdir (Split-Path $d -Parent) -Force | Out-Null }
+        Copy-Item -Recurse -Force -LiteralPath $s -Destination $d
         Write-Host "  [DIR] $rel"
     } else { Write-Host "  [SKIP-DIR] $rel" -ForegroundColor DarkGray }
 }
@@ -80,9 +80,9 @@ $jsFiles = @(
     "js\modules\proposal_ui.js",
     "js\modules\signature_pad.js",
     "js\views\case_overview.js",
-    "js\views\case_analysis.js",
-    "js\views\case_lawyer.js",
-    "js\views\case_tabs.js"
+    "js\\views\case_analysis.js",
+    "js\\views\case_lawyer.js",
+    "js\\views\case_tabs.js"
 )
 foreach ($f in $jsFiles) { CopyFile $f }
 
@@ -109,7 +109,7 @@ playwright.config.js
 *.bak
 *.old
 "@
-Set-Content -Path (Join-Path $dest ".gitignore") -Value $gi -Encoding UTF8
+Out-File -FilePath (Join-Path $dest ".gitignore") -InputObject $gi -Encoding utf8
 Write-Host "  [OK] .gitignore"
 
 $count = (Get-ChildItem -Recurse -File $dest).Count

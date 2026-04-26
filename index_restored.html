@@ -1,0 +1,410 @@
+?<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HappyHappE - ?�사?�건 비�?�??�전 ?�의 ?�랫??/title>
+    <meta name="description" content="?�해?��? ?�의??모두�??�한 ?�전?�고 공정??비�?�??�의 ?�랫?? ?�명??보장, ?�스?�로 ?�전 결제, 법률 ?�이??기반 ?�의�??�정.">
+
+    <!-- Google Analytics GA4 -->
+    <!-- ?�️ ?�래 G-XXXXXXXXXX�??�제 Google Analytics 측정 ID�?교체?�세??-->
+    <!-- 발급 방법: analytics.google.com ??�?�????�이???�트�???측정 ID 복사 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-grid">
+                    <span class="logo-row-en logo-en-left">Happy</span>
+                    <span class="logo-row-en logo-en-right">HappE.</span>
+                    <span class="logo-row-kr logo-kr-left">?�이??/span>
+                    <span class="logo-row-kr logo-kr-right">?�의</span>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#features">?�비???�개</a></li>
+                    <li><a href="#process">?�용 ?�차</a></li>
+                    <!-- <li><a href="#faq">?�주 묻는 질문</a></li> -->
+                </ul>
+            </nav>
+            <div class="auth-buttons" style="display: none;">
+                <!-- Login button moved to main hero section -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="glow-bg"></div>
+        <div class="glow-bg-2"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        ?�처 ?�는 ?�의,<br>
+                        <span class="highlight">블라?�드 ?�안</span>?�로 ??�?까이
+                    </h1>
+                    <p>
+                        ?�로???�망 금액?? ?�긴 �? ?�스?�이 격차�?분석???�립?�다.<br>
+                        ?�치 보�? 말고 ?�신�??�안?�고, ?�트?�스 ?�이 ?�의?�을 찾으?�요.
+                    </p>
+                    <div class="hero-cta">
+                        <!-- Buttons removed as per request -->
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <!-- Central Login Card -->
+                    <div class="glass-card login-card"
+                        style="padding: 40px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; margin: 0 auto; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
+                        <h3 style="text-align: center; margin-bottom: 25px; font-size: 1.5rem;">로그??/h3>
+                        <form id="heroLoginForm" onsubmit="handleHeroLogin(event)">
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label
+                                    style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">?�메??/label>
+                                <input type="email" id="heroEmail" class="form-input"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;"
+                                    placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 30px;">
+                                <label
+                                    style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">비�?번호</label>
+                                <input type="password" id="heroPassword" class="form-input"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white;"
+                                    placeholder="비�?번호 ?�력" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 20px;">로그??/button>
+
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                                <a href="#" style="color: var(--text-muted); text-decoration: none;">비�?번호 찾기</a>
+                                <a href="login.html"
+                                    style="color: var(--secondary); text-decoration: none; font-weight: 600;">?�원�???/a>
+                            </div>
+
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="color: var(--text-muted); font-size: 0.9rem;">?�는</span>
+                            </div>
+
+                            <button type="button" class="btn" onclick="handleGuestLogin()"
+                                style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 10px; background: rgba(74, 158, 255, 0.15); color: #7bbaff; border: 1px solid rgba(74, 158, 255, 0.4); font-weight: 600;">
+                                <i class="fas fa-eye" style="margin-right:8px;"></i> �????�이 체험?�기 (?�러보기)
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>??HappyHappE ?��???</h2>
+                <p>불필?�한 감정 ?�모??줄이�? ?�의??본질?�만 집중?�세??</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1: Blind Proposal (Key Feature) -->
+                <div class="glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>?�리?�인 블라?�드 ?�안</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        직접?�인 금액 ?�정?�로 ?�한 감정 ?�모�?막습?�다. ?�로 비공개로 ?�망?�을 ?�안?�면, ?�스?�이 격차�?좁�?�??�록 중재?�니??
+                    </p>
+                </div>
+
+                <!-- Feature 2: Safe Communication -> Record Keeping -->
+                <div class="glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>?�명???�통�??�전??기록 보�?</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        모든 ?????�용?? ?�전?�게 ???�되?? 만약???�황??증빙 ?�료�??�용?????�습?�다. 감정?�인 분쟁 ?????�성?�인 기록???�기?�요.
+                    </p>
+                </div>
+
+                <!-- Feature 3: Electronic Signature -> Legal Finality -->
+                <div class="glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>법적 분쟁???�내???�벽???�의??/h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        ?�의 ?�사 즉시 �??�사 �??��? 거친 ?��? ?�식???�의?��? ?�성?�니?? 추후 발생?????�는 법적 ?�비�??�천 차단?�고 ?�건??깔끔?�게 마무리하?�요.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section (New) -->
+    <section id="process" class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>?�용 ?�차</h2>
+                <p>복잡???�의, HappyHappE?�서??4?�계�??�납?�다.</p>
+            </div>
+
+            <div class="process-steps">
+                <!-- Step 1 -->
+                <div class="process-card has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">01</div>
+                    <div class="icon-box"><i class="fas fa-door-open"></i></div>
+                    <h3>�?개설 �??�달</h3>
+                    <div class="hint-text">??과정 ?�펴보기</div>
+                    <div class="process-tooltip">
+                        "방장???�어 [?�의�?만들�?�??�르�??�건???�수?�니?? 방이 ?�성?�며 발급?�는 '고유 초�?코드'�??��?방에�?문자 ?�으�??�달?�세?? ??개인 ?�락�??�출 ?�이 즉시 ????공간???�립?�다."
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <!-- Step 2 -->
+                <div class="process-card has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">02</div>
+                    <div class="icon-box"><i class="fas fa-comments"></i></div>
+                    <h3>비공�??�통</h3>
+                    <div class="hint-text">??과정 ?�펴보기</div>
+                    <div class="process-tooltip">
+                        "?�측???�장?�면 ?�직 ???�람만의 채팅 ?�면???�립?�다. ?�의금을 ?�의?�기 ?? 채팅?�로 ?�성?�인 ???��? ?�누�?[?�과�??�성] ???�식??맞춰 문서�??�전?�게 교환?????�습?�다."
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <!-- Step 3 -->
+                <div class="process-card highlight-step has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">03</div>
+                    <div class="icon-box"><i class="fas fa-sliders-h"></i></div>
+                    <h3>블라?�드 ?�안</h3>
+                    <div class="hint-text" style="color:var(--text-main); font-weight:bold;">??과정 ?�펴보기</div>
+                    <div class="process-tooltip">
+                        "본격?�인 ?�의???�어�?�?블라?�드 금액 ?�력창이 ?�니?? ?�로???�면??보이�? ?�는 ?�태?�서 ?????�는 최�?/최소 금액???�력?�면, ?�스?�이 ?��? ?�합???�전?�게 중간 ?�의?�을 ?�시?�니??"
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="process-arrow"><i class="fas fa-chevron-right"></i></div>
+
+                <!-- Step 4 -->
+                <div class="process-card has-tooltip" onclick="this.classList.toggle('active')">
+                    <div class="step-number">04</div>
+                    <div class="icon-box"><i class="fas fa-file-signature"></i></div>
+                    <h3>?�자 ?�명 ?�료</h3>
+                    <div class="hint-text">??과정 ?�펴보기</div>
+                    <div class="process-tooltip">
+                        "?�출??금액???�측??[?�의?�기]�??�료?�면, 기성 ?��? ?�의??PDF�? ?��??�니?? ?�마?�폰?�나 마우?�로 각자 ?�자?�명??마치�??�력???�성?�며 모든 ?�차�? 분쟁 ?�이 종료?�니??"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Minimal for MVP) -->
+    <footer style="padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+        <div class="container">
+            <!-- ?�심 ?�수 링크 -->
+            <div style="margin-bottom: 20px;">
+                <a href="#" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">?�용?��?</a>
+                <span style="color: rgba(255,255,255,0.2);">|</span>
+                <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px; font-weight: 600;">개인?�보처리방침</a>
+            </div>
+            
+            <!-- 최소?�의 ?�영/?�락 ?�보 -->
+            <div style="line-height: 1.6; margin-bottom: 20px; color: rgba(255,255,255,0.4);">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #fff;">HappyHappE</span><br>
+                Contact: dulee2094@naver.com
+            </div>
+            
+            <!-- ???�권 -->
+            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.3);">
+                &copy; 2026 HappyHappE. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Welcome Modal (Founder's Letter) -->
+    <div id="welcomeModal" class="welcome-modal-overlay">
+        <div class="welcome-modal-content">
+            <div class="modal-header">
+                <h3>HappyHappE�?찾아주신 분들�??�리??�?</h3>
+                <button class="close-modal-btn" onclick="closeWelcomeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ?�랫?�안 ?�많?? ?�사 ?�건???�루???�면??�??????��?까�????�꼈???�간???�습?�다. 바로 ?�측 모두 ?�만?�게 ?�의???�사�? ?�음?�도 불구?�고, 직접 ??면하거나 ?�락??주고받는 과정?�서 발생?�는 <strong>'감정???�처'</strong>?? <strong>'모욕�?</strong> ?�문???�의�? 결렬?�는 경우???�니??
+                </p>
+                <p>
+                    '?�로 만나거나 ?�씨름하�? ?�고 ?�직 ?�의 조건?�만 집중?????�다�?불필?�한 감정 ?�모�?막을 ???��? ?�을�?'<br>
+                    ?�러??고�? ?�에, ?�망 금액??직접 ?�에 ?�리??껄끄?��? ?�이 ?�스?�이 조율???�는 <strong>'블라?�드 ?�의 ?�스??</strong>??기획?�게 ?�었?�니?? �?????공간???�러분이 겪고 계신 ?�든 분쟁?????�상???�처 ?�이 ?�만?�게 매듭짓는 ?��? ?�구�? ?�기�?진심?�로 바랍?�다.
+                </p>
+                <div class="beta-notice">
+                    <p class="notice-title"><i class="fas fa-info-circle"></i> ?�려?�립?�다</p>
+                    <p style="color:var(--text-main);">?�재 HappyHappE?????��? ?�비?��? 만들�??�해 <strong>베�?(Beta) ?�비??/strong>�??�영 중입?�다. ?�용 �?발생?�는 ?�류???�안?�고 ?�으???�이 ?�다�??�제???�래 ?�메?�로 ?�락 �??�드립니??</p>
+                    <p class="contact-email">?�️ ?�견 보내�? <strong>dulee2094@naver.com</strong></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <label class="dont-show-again">
+                    <input type="checkbox" id="dontShowToday"> ?�늘 ?�루 보�? ?�기
+                </label>
+                <button class="btn btn-primary" onclick="closeWelcomeModal()" style="padding: 8px 25px;">?�기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Inline script to handle Hero Login
+        async function handleHeroLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('heroEmail').value;
+            const password = document.getElementById('heroPassword').value;
+
+            // Basic validation
+            if (!email || !password) {
+                alert('?�메?�과 비�?번호�??�력?�주?�요.');
+                return;
+            }
+
+            // API ?�정
+            const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const isJson = res.headers.get('content-type')?.includes('application/json');
+                const data = isJson ? await res.json() : null;
+
+                if (res.ok && data && data.success) {
+                    localStorage.setItem('user_id', data.userId);
+                    localStorage.setItem('user_name', data.name);
+                    localStorage.removeItem('is_guest'); // ?�심: 진짜 ?�원 로그????게스??모드 ?�제
+                    alert(`${data.name}???�영?�니??`);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    const errorMsg = (data && data.error) ? data.error : '?�메???�는 비�?번호�??�인?�주?�요.';
+                    alert(`로그???�패: ${errorMsg}`);
+                }
+            } catch (err) {
+                console.error(err);
+                alert(`?�버 ?�결 ?�류:\n${err.message}\n(?�버 ?�태�??�인?�주?�요)`);
+            }
+        }
+
+        async function handleGuestLogin() {
+            const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/guest-login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem('user_id', data.userId);
+                    localStorage.setItem('user_name', data.name);
+                    localStorage.setItem('is_guest', 'true');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('?�러보기 ?�소�?�?비하?��? 문제�? ?�겼?�니?? ' + data.error);
+                }
+            } catch (err) {
+                alert('?�버 ?�결???�인?�주?�요.');
+                console.error(err);
+            }
+        }
+
+        // Welcome Modal Logic & Visit Tracking
+        document.addEventListener('DOMContentLoaded', () => {
+            // Visit Tracking
+            const visitToken = localStorage.getItem('visit_token') || 'vtok_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('visit_token', visitToken);
+            
+            const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const API_BASE = IS_LOCAL ? 'http://localhost:3300/api' : '/api';
+            
+            fetch(`${API_BASE}/visit`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    sessionToken: visitToken, 
+                    pageUrl: window.location.pathname 
+                })
+            }).catch(e => console.error('Visit tracking failed', e));
+
+            const hideModalUntil = localStorage.getItem('hideWelcomeModalUntil');
+            const now = new Date().getTime();
+            
+            // 만약 ?��? 처리?��? ?�았거나 ?��? ?�간??�??�으�?모달 ?�시
+            if (!hideModalUntil || now > parseInt(hideModalUntil)) {
+                setTimeout(() => {
+                    const modal = document.getElementById('welcomeModal');
+                    if (modal) {
+                        modal.classList.add('show');
+                        
+                        // 배경(?�버?�이) ?�릭 ???�기 기능 추�?
+                        modal.addEventListener('click', (e) => {
+                            if (e.target === modal) {
+                                closeWelcomeModal();
+                            }
+                        });
+                    }
+                }, 500); // 0.5�???�??�럽�??�장
+            }
+        });
+
+        function closeWelcomeModal() {
+            const dontShow = document.getElementById('dontShowToday').checked;
+            if (dontShow) {
+                // 24?�간(�?리초) ?�안 ?��?
+                const hideUntil = new Date().getTime() + (24 * 60 * 60 * 1000);
+                localStorage.setItem('hideWelcomeModalUntil', hideUntil);
+            }
+            document.getElementById('welcomeModal').classList.remove('show');
+        }
+    </script>
+</body>
+
+</html>

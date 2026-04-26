@@ -1,19 +1,19 @@
 :root {
     /* Colors */
-    --primary: hsl(35, 100%, 55%); /* Orange */
-    --primary-hover: hsl(35, 100%, 45%);
-    --secondary: hsl(50, 100%, 50%); /* Yellow */
-    --accent: hsl(140, 70%, 50%); /* Green */
+    --primary: #3b82f6; /* Trust Blue */
+    --primary-hover: #2563eb;
+    --secondary: #10b981; /* Emerald Green */
+    --accent: #6366f1; /* Indigo */
 
-    --bg-dark: hsl(30, 15%, 10%); /* Warm dark background */
-    --bg-card: hsla(30, 15%, 16%, 0.6);
-    --bg-glass: hsla(30, 15%, 16%, 0.4);
+    --bg-dark: #0f172a; /* Deep Slate Navy background */
+    --bg-card: rgba(30, 41, 59, 0.6);
+    --bg-glass: rgba(30, 41, 59, 0.4);
 
-    --text-main: hsl(0, 0%, 100%);
-    --text-muted: hsla(30, 20%, 80%, 0.8);
+    --text-main: #f8fafc; /* Off-White for eye comfort */
+    --text-muted: #94a3b8; /* Cool Gray */
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-primary: linear-gradient(135deg, var(--primary), #2dd4bf);
     --gradient-logo: linear-gradient(135deg, #ff9a44, #fc6076);
     --gradient-glow: radial-gradient(circle at center, var(--primary), transparent 70%);
 
@@ -176,7 +176,7 @@ header .container {
 
 /* Row 1 Cells */
 .logo-en-left {
-    color: #fff;
+    color: #bae6fd;
     text-align: right;
     grid-column: 1;
     grid-row: 1;
@@ -203,8 +203,8 @@ header .container {
 
 /* Row 2 Cells */
 .logo-kr-left {
-    color: var(--text-muted);
-    /* Gray */
+    color: #bae6fd;
+    /* Ice Blue */
     text-align: right;
     grid-column: 1;
     grid-row: 2;

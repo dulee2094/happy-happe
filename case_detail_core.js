@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SAFETY CHECK: Utils Fallback ---
     if (typeof window.getRoleText !== 'function') {
         console.warn('Utils module missing. Defining fallbacks.');
-        window.getRoleText = (r) => r === 'offender' ? '피의자' : '피해자';
+        window.getRoleText = (r) => r === 'offender' ? '제안자' : '상대방';
         window.getStatusText = (s) => s || '상태 미정';
         window.getIconClass = () => 'fas fa-question';
         window.getColor = () => '#ccc';
