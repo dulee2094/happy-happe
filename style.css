@@ -14,7 +14,8 @@
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary), #2dd4bf);
-    --gradient-logo: linear-gradient(135deg, #ff9a44, #fc6076);
+    --gradient-logo: linear-gradient(135deg, #ffb347, #ff7b00); /* HappE */
+    --gradient-logo-left: linear-gradient(135deg, #4facfe, #00f2fe); /* Happy */
     --gradient-glow: radial-gradient(circle at center, var(--primary), transparent 70%);
 
     /* Spacing */
@@ -176,7 +177,10 @@ header .container {
 
 /* Row 1 Cells */
 .logo-en-left {
-    color: #bae6fd;
+    background: var(--gradient-logo-left);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-align: right;
     grid-column: 1;
     grid-row: 1;
@@ -203,8 +207,10 @@ header .container {
 
 /* Row 2 Cells */
 .logo-kr-left {
-    color: #bae6fd;
-    /* Ice Blue */
+    background: var(--gradient-logo-left);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-align: right;
     grid-column: 1;
     grid-row: 2;

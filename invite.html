@@ -137,8 +137,20 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', updateMessage);
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomCode = urlParams.get('roomCode');
+            const topic = urlParams.get('topic');
 
+            if (roomCode) {
+                document.getElementById('roomNameInput').value = roomCode;
+            }
+            if (topic) {
+                document.getElementById('caseNameInput').value = topic;
+            }
+
+            updateMessage();
+        });
         const inputs = ['roomNameInput', 'roomPwInput', 'senderName', 'caseNameInput', 'customMessage'];
         inputs.forEach(id => {
             const el = document.getElementById(id);
