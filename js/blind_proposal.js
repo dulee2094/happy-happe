@@ -354,7 +354,17 @@ async function checkStatus() {
         }
 
         // Reset alert flag on success
-        if (data && data.success) window._errorAlerted = false;
+        if (data && data.success) {
+            window._errorAlerted = false;
+            const banner = document.getElementById('inviteBanner');
+            if (banner) {
+                if (!data.opponentName || data.opponentName === '-' || data.opponentName === '대기 중' || data.connectionStatus === 'pending') {
+                    banner.style.display = 'flex';
+                } else {
+                    banner.style.display = 'none';
+                }
+            }
+        }
 
         // DEBUG
         if (window.updateDebugInfo) window.updateDebugInfo(data);
@@ -366,6 +376,17 @@ async function checkStatus() {
 
 
 // --- Initialization ---
+
+window.goToInvitePage = function() {
+    const roomId = localStorage.getItem('current_room_id');
+    const roomCode = localStorage.getItem('current_room_code') || '';
+    const topic = localStorage.getItem('current_room_topic') || '';
+    
+    // Remove HTML tags from topic just in case
+    const cleanTopic = topic.replace(/<[^>]*>?/gm, '').trim();
+    
+    window.location.href = `invite.html?roomCode=${encodeURIComponent(roomCode)}&topic=${encodeURIComponent(cleanTopic)}`;
+};
 
 window.addEventListener('DOMContentLoaded', () => {
     console.log('[Controller] Initializing Blind Proposal...');

@@ -68,6 +68,19 @@ window.createCaseCard = function (caseItem) {
 
     const regDate = caseItem.createdAt ? new Date(caseItem.createdAt).toLocaleDateString() : (caseItem.registrationDate || '2024.01.01');
 
+    let inviteButtonHtml = '';
+    if (!caseItem.counterpartyName || connStatus === 'pending') {
+        const inviteTopic = displayTitle.replace(/<[^>]*>?/gm, '').trim(); // Remove any HTML tags from topic
+        const inviteUrl = `invite.html?roomCode=${encodeURIComponent(caseItem.roomCode || '')}&topic=${encodeURIComponent(inviteTopic)}`;
+        inviteButtonHtml = `
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; background: rgba(74, 158, 255, 0.2); color: #4A9EFF; border: 1px solid rgba(74, 158, 255, 0.5);" onclick="event.stopPropagation(); location.href='${inviteUrl}'">
+                    <i class="fas fa-paper-plane" style="margin-right: 5px;"></i> 상대방 초대하기
+                </button>
+            </div>
+        `;
+    }
+
     card.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
             <div>
@@ -93,6 +106,7 @@ window.createCaseCard = function (caseItem) {
             </div>
             <i class="fas fa-chevron-right" style="color: var(--text-muted); font-size: 1.2rem;"></i>
         </div>
+        ${inviteButtonHtml}
     `;
 
     return card;
