@@ -14,8 +14,8 @@
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary), #2dd4bf);
-    --gradient-logo: linear-gradient(135deg, #ffb347, #ff7b00); /* HappE */
-    --gradient-logo-left: linear-gradient(135deg, #4facfe, #00f2fe); /* Happy */
+    --gradient-logo: linear-gradient(135deg, #10b981, #3b82f6); /* HappE */
+    --gradient-logo-left: linear-gradient(135deg, #FFB800, #FF8A00); /* Happy */
     --gradient-glow: radial-gradient(circle at center, var(--primary), transparent 70%);
 
     /* Spacing */
@@ -221,10 +221,7 @@ header .container {
 }
 
 .logo-kr-right {
-    background: var(--gradient-logo);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--secondary);
     text-align: left;
     grid-column: 2;
     grid-row: 2;
