@@ -39,7 +39,11 @@ const Room = sequelize.define('Room', {
     nextRoundIntentPartyA: { type: DataTypes.BOOLEAN, defaultValue: false },
     nextRoundIntentPartyB: { type: DataTypes.BOOLEAN, defaultValue: false },
 
-    finalAmount: { type: DataTypes.BIGINT }
+    finalAmount: { type: DataTypes.BIGINT },
+
+    // Room visibility / Deletion Tracking
+    leftByPartyA: { type: DataTypes.BOOLEAN, defaultValue: false },
+    leftByPartyB: { type: DataTypes.BOOLEAN, defaultValue: false }
 });
 
 module.exports = Room;

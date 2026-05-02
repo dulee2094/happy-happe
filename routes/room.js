@@ -149,8 +149,8 @@ router.get('/status', async (req, res) => {
         const rooms = await Room.findAll({
             where: {
                 [Op.or]: [
-                    { partyAId: userId },
-                    { partyBId: userId }
+                    { partyAId: userId, leftByPartyA: false },
+                    { partyBId: userId, leftByPartyB: false }
                 ]
             },
             order: [['createdAt', 'DESC']]
@@ -181,6 +181,49 @@ router.get('/status', async (req, res) => {
             res.json({ found: false, rooms: [] });
         }
     } catch (e) {
+        res.status(500).json({ success: false, error: e.message });
+    }
+});
+
+// Leave / Delete Room
+router.post('/leave', async (req, res) => {
+    let { userId, roomId } = req.body;
+    userId = parseInt(userId, 10);
+
+    try {
+        const room = await Room.findByPk(roomId);
+        if (!room) return res.json({ success: false, error: '존재하지 않는 방입니다.' });
+
+        if (room.partyAId !== userId && room.partyBId !== userId) {
+            return res.status(403).json({ success: false, error: '권한이 없습니다.' });
+        }
+
+        // Case 1: Pending & Creator -> Hard delete
+        if (room.status === 'pending' && room.creatorId === userId) {
+            await room.destroy();
+            return res.json({ success: true, message: '방이 영구적으로 삭제되었습니다.' });
+        }
+
+        // Case 2 & 3: Negotiating / Settled / Expired -> Hide from my list
+        if (room.partyAId === userId) room.leftByPartyA = true;
+        if (room.partyBId === userId) room.leftByPartyB = true;
+
+        // If it was negotiating, mark it as expired (abandoned)
+        if (room.status === 'negotiating') {
+            room.status = 'expired';
+        }
+
+        await room.save();
+
+        // If both parties have left, optionally clean up DB
+        if (room.leftByPartyA && room.leftByPartyB) {
+            await room.destroy();
+            return res.json({ success: true, message: '모두가 방을 나가 방이 삭제되었습니다.' });
+        }
+
+        res.json({ success: true, message: '목록에서 삭제되었습니다.' });
+    } catch (e) {
+        console.error(e);
         res.status(500).json({ success: false, error: e.message });
     }
 });

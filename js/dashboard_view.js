@@ -90,7 +90,12 @@ window.createCaseCard = function (caseItem) {
                 </div>
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">내 역할: ${roleText}</p>
             </div>
-            ${statusBadge}
+            <div style="display: flex; align-items: center; gap: 10px;">
+                ${statusBadge}
+                <button class="btn-glass" onclick="event.stopPropagation(); window.leaveRoom(${caseItem.id}, '${connStatus}', ${String(caseItem.creatorId) === localStorage.getItem('user_id')})" style="padding: 5px 8px; background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2); color: #ff6b6b; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,0,0,0.2)'" onmouseout="this.style.background='rgba(255,0,0,0.1)'" title="방 나가기 / 삭제">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
         </div>
         <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px;">
             <div style="width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
