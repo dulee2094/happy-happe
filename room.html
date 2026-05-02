@@ -50,40 +50,37 @@
             </a>
 
             <!-- Context Info -->
-            <div
-                style="padding: 20px; margin-bottom: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px;">현재 진행 중인 협상</div>
-                <div id="sidebarCaseNumber"
-                    style="font-weight: 700; font-size: 1.1rem; color: white; margin-bottom: 5px;">-</div>
-                <div style="font-size: 0.85rem; color: #aaa;"><i class="fas fa-user"></i> 상대방: <span
-                        id="sidebarCounterparty">-</span></div>
+            <div style="padding: 20px; margin-bottom: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">현재 진행 중인 협상</div>
+                    <span class="status-badge" id="statusBadge" style="background: rgba(255,255,255,0.1); color: var(--text-muted); font-size: 0.75rem; padding: 4px 8px;">제안 대기중</span>
+                </div>
+                <div id="sidebarCaseNumber" style="font-weight: 700; font-size: 1.1rem; color: white; margin-bottom: 5px;">-</div>
+                <div style="font-size: 0.85rem; color: #aaa;"><i class="fas fa-user"></i> 상대방: <span id="sidebarCounterparty">-</span></div>
             </div>
 
             <nav class="nav-links">
-                <div class="nav-item active"
-                    style="margin-bottom: 10px; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6;">
+                <div class="nav-item active">
                     <i class="fas fa-search-dollar"></i>
                     <span>블라인드 제안 중</span>
                 </div>
 
-                <div class="nav-item" onclick="goToInvitePage()"
-                    style="margin-bottom: 10px; cursor: pointer; color: #94a3b8; background: rgba(255,255,255,0.03); transition: all 0.2s;"
-                    onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='white'"
-                    onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.color='#94a3b8'">
+                <div class="nav-item" id="navAgreementBtn" onclick="goToAgreementPage()" style="opacity: 0.6;">
+                    <i class="fas fa-file-signature"></i>
+                    <span>조율 확인서 발급 <i class="fas fa-lock" id="navAgreementLock" style="font-size:0.8rem; margin-left: 5px; color: var(--text-muted);"></i></span>
+                </div>
+
+                <div class="nav-item" onclick="goToInvitePage()">
                     <i class="fas fa-envelope-open-text"></i>
                     <span>초대하기</span>
                 </div>
 
-                <div class="nav-item" onclick="window.ProposalUI.showGuide()"
-                    style="margin-bottom: 30px; cursor: pointer; color: #94a3b8; background: rgba(255,255,255,0.03); transition: all 0.2s;"
-                    onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='white'"
-                    onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.color='#94a3b8'">
+                <div class="nav-item" onclick="window.ProposalUI.showGuide()">
                     <i class="fas fa-book-open"></i>
                     <span>이용 가이드</span>
                 </div>
 
-                <div class="nav-item" onclick="location.href='dashboard.html?page=cases'"
-                    style="cursor: pointer; opacity: 0.8; transition: opacity 0.3s;">
+                <div class="nav-item" onclick="location.href='dashboard.html?page=cases'">
                     <i class="fas fa-arrow-left"></i>
                     <span>방 목록으로 복귀</span>
                 </div>
@@ -97,13 +94,7 @@
                     <h2 style="margin-bottom: 5px;">블라인드 협상 진행</h2>
                     <p style="color: var(--text-muted);">감정 소모 없이 희망 금액을 조율해보세요.</p>
                 </div>
-                <div style="display: flex; gap: 15px; align-items: center;">
-                    <button class="btn btn-glass" style="font-size: 0.85rem;" onclick="location.href='dashboard.html'">
-                        <i class="fas fa-arrow-left" style="margin-right: 6px;"></i> 뒤로가기
-                    </button>
-                    <span class="status-badge" id="statusBadge"
-                        style="background: var(--bg-card); color: var(--text-muted);">제안 대기중</span>
-                </div>
+
             </div>
 
             <!-- Invite Banner moved to Sidebar -->
@@ -155,6 +146,17 @@
                             </p>
                         </div>
 
+                        <!-- 제안 근거 및 코멘트 -->
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">
+                                <span>제안 근거 및 코멘트 <span style="font-size:0.75rem; color:#888;">(선택사항)</span></span>
+                                <span id="messageCharCount" style="font-size:0.8rem; color:#888;">0 / 300 자</span>
+                            </label>
+                            <textarea id="myMessage" placeholder="예: 시세 및 기여도를 반영한 금액입니다.&#10;예: 감가상각을 고려한 절충안입니다."
+                                style="width: 100%; height: 80px; resize: none; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; color: white; font-size: 0.95rem; font-family: inherit;"
+                                maxlength="300" oninput="document.getElementById('messageCharCount').innerText = this.value.length + ' / 300 자'"></textarea>
+                        </div>
+
                         <!-- Duration -->
                         <div style="margin-bottom: 20px;">
                             <label
@@ -194,10 +196,10 @@
                             <thead>
                                 <tr
                                     style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); text-align: left;">
-                                    <th style="padding: 10px;">차수</th>
-                                    <th style="padding: 10px;">일시</th>
-                                    <th style="padding: 10px;">금액(원)</th>
-                                    <th style="padding: 10px;">결과</th>
+                                    <th style="padding: 10px; width: 15%;">차수</th>
+                                    <th style="padding: 10px; width: 25%;">제안 금액</th>
+                                    <th style="padding: 10px; width: 40%;">제안 근거 (메시지)</th>
+                                    <th style="padding: 10px; width: 20%;">결과</th>
                                 </tr>
                             </thead>
                             <tbody id="historyTableBody">
