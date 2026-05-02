@@ -128,16 +128,78 @@ window.ProposalUI = {
                  statusText = '<span style="color: #4ade80;">합의 타결</span>';
             }
 
-            const msgText = p.message ? p.message : '<span style="color: #64748b;">(없음)</span>';
+            let msgHtml = '<span style="color: #64748b;">(없음)</span>';
+            if (p.message) {
+                const encodedMsg = encodeURIComponent(p.message);
+                const safeMsg = p.message.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                if (p.message.length > 12) {
+                    const shortMsg = safeMsg.substring(0, 12) + '...';
+                    msgHtml = `
+                        <span style="cursor: pointer; color: #94a3b8; transition: color 0.2s; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 2px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'" onclick="ProposalUI.showMessageModal('${encodedMsg}')">
+                            ${shortMsg} <i class="fas fa-envelope" style="color: #3b82f6; margin-left: 4px;"></i>
+                        </span>
+                    `;
+                } else {
+                    msgHtml = `
+                        <span style="cursor: pointer; color: #cbd5e1; transition: color 0.2s; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 2px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'" onclick="ProposalUI.showMessageModal('${encodedMsg}')">
+                            ${safeMsg} <i class="fas fa-envelope" style="color: #3b82f6; margin-left: 4px;"></i>
+                        </span>
+                    `;
+                }
+            }
             
             tr.innerHTML = `
                 <td style="padding: 12px 10px;">${p.round}</td>
                 <td style="padding: 12px 10px; font-weight: bold; color: #fff;">${p.amount.toLocaleString()}원</td>
-                <td style="padding: 12px 10px; color: #cbd5e1; font-size: 0.85rem; white-space: pre-wrap; word-break: break-all;">${msgText}</td>
+                <td style="padding: 12px 10px; color: #cbd5e1; font-size: 0.85rem;">${msgHtml}</td>
                 <td style="padding: 12px 10px;">${statusText}</td>
             `;
             tbody.appendChild(tr);
         });
+    },
+
+    // --- Message Modal ---
+    showMessageModal(encodedMsg) {
+        let modal = document.getElementById('messageModal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'messageModal';
+            modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); z-index:3000; display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition:all 0.3s ease; padding:20px;';
+            modal.innerHTML = `
+                <div style="background:#1e293b; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:30px; max-width:400px; width:100%; box-shadow:0 25px 50px rgba(0,0,0,0.5); transform:translateY(20px); transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:15px;">
+                        <h3 style="color:#fff; margin:0; font-size:1.2rem;"><i class="fas fa-envelope-open-text" style="color:#3b82f6; margin-right:8px;"></i>제안 근거 (메시지)</h3>
+                        <button onclick="ProposalUI.closeMessageModal()" style="background:none; border:none; color:#64748b; font-size:1.5rem; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">&times;</button>
+                    </div>
+                    <div id="messageModalContent" style="color:#cbd5e1; font-size:1rem; line-height:1.6; white-space:pre-wrap; word-break:break-all; max-height: 50vh; overflow-y: auto; text-align: left; padding-right: 5px;"></div>
+                    <div style="text-align:center; margin-top:25px;">
+                        <button onclick="ProposalUI.closeMessageModal()" style="background:linear-gradient(135deg, #3b82f6, #2563eb); color:white; border:none; padding:12px 30px; border-radius:8px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(59,130,246,0.3);">닫기</button>
+                    </div>
+                </div>
+            `;
+            // close on backdrop click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) ProposalUI.closeMessageModal();
+            });
+            document.body.appendChild(modal);
+        }
+        
+        const decodedMsg = decodeURIComponent(encodedMsg);
+        document.getElementById('messageModalContent').textContent = decodedMsg;
+        
+        // Show
+        modal.style.visibility = 'visible';
+        modal.style.opacity = '1';
+        modal.querySelector('div').style.transform = 'translateY(0)';
+    },
+
+    closeMessageModal() {
+        const modal = document.getElementById('messageModal');
+        if (modal) {
+            modal.style.opacity = '0';
+            modal.style.visibility = 'hidden';
+            modal.querySelector('div').style.transform = 'translateY(20px)';
+        }
     },
 
     // --- Gauge & Result Chart ---
@@ -174,7 +236,7 @@ window.ProposalUI = {
             desc = "제안하신 금액과 상대방의 희망 금액 차이가 <strong>10% 이내</strong>입니다.<br>합의가 눈앞에 있습니다!";
             width = '98%'; badgeText = "유사 일치";
             advice = "격차가 매우 좁혀졌습니다. <strong>[중간점 조율]</strong>을 통해 즉시 타결하는 것을 강력히 추천합니다.";
-            imgSrc = 'images/mediator_success.png';
+            imgSrc = 'images/room_success.png';
             imgBorderColor = 'rgba(74, 222, 128, 0.4)';
         } else if (gapPercent <= 30) {
             color = '#3b82f6';
@@ -182,7 +244,7 @@ window.ProposalUI = {
             desc = "의견 차이가 크지 않습니다.<br>조금만 더 조율하면 합의점을 찾을 수 있습니다.";
             width = '75%'; badgeText = "조율 가능";
             advice = "상대방과 긍정적인 범위 내에서 조율이 진행 중입니다. 다음 라운드에서 조금 더 유연한 제안을 해보세요.";
-            imgSrc = 'images/mediator_analysis_complete.png';
+            imgSrc = 'images/room_gap_detected.png';
             imgBorderColor = 'rgba(59, 130, 246, 0.4)';
         } else if (gapPercent <= 60) {
             color = '#facc15';
@@ -190,7 +252,7 @@ window.ProposalUI = {
             desc = "희망 금액의 차이가 다소 큽니다.<br>서로의 입장을 다시 한번 고려해보세요.";
             width = '50%'; badgeText = "차이 발생";
             advice = "격차를 줄이기 위해 전략적인 양보가 필요할 수 있습니다. 감정적인 대응보다 합리적인 접근이 필요합니다.";
-            imgSrc = 'images/mediator_gap_large.png';
+            imgSrc = 'images/room_gap_detected.png';
             imgBorderColor = 'rgba(250, 204, 21, 0.4)';
         } else {
             color = '#ef4444';
@@ -198,7 +260,7 @@ window.ProposalUI = {
             desc = "상대방과 금액에 대한 기대치가 많이 다릅니다.<br>현실적인 대안을 고민해야 합니다.";
             width = '25%'; badgeText = "큰 격차";
             advice = "현재 격차가 매우 큽니다. 무리한 설득보다는 상대방의 상황을 이해하려는 노력이 선행되어야 합니다.";
-            imgSrc = 'images/mediator_gap_large.png';
+            imgSrc = 'images/room_gap_detected.png';
             imgBorderColor = 'rgba(239, 68, 68, 0.4)';
         }
 
