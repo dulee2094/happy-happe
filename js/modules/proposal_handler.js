@@ -54,8 +54,12 @@ window.ProposalHandler = {
             default:
                 console.warn('[ProposalHandler] Unknown State:', state);
         }
-
         this.currentState = state;
+
+        // Render History Table
+        if (typeof ProposalUI.renderHistoryTable === 'function') {
+            ProposalUI.renderHistoryTable(data);
+        }
     },
 
     // --- Phase Handlers ---
@@ -399,8 +403,9 @@ window.ProposalHandler = {
             return;
         }
 
-        const calcDiff = Math.abs(d.offenderAmount - d.victimAmount);
-        const gapPercent = (calcDiff / Math.max(d.offenderAmount, d.victimAmount)) * 100;
+        const calcDiff = d.diff !== undefined ? d.diff : Math.abs(d.partyAAmount - d.partyBAmount);
+        const maxVal = Math.max(d.partyAAmount || 0, d.partyBAmount || 0);
+        const gapPercent = maxVal ? (calcDiff / maxVal) * 100 : 0;
         // isFinalLoop logic: round >= 5 and NOT extended
         // Use data.isExtended if available
         const isFinalLoop = (data.currentRound >= 5 && !data.isExtended);
@@ -420,7 +425,9 @@ window.ProposalHandler = {
             myAmount = window.myLastProposalAmount || 0;
         }
 
-        ProposalUI.renderGaugeChart(gapPercent, myAmount, isFinalLoop, data.currentRound);
+        const oppMessage = data.isPartyA ? d.partyBMessage : d.partyAMessage;
+
+        ProposalUI.renderGaugeChart(gapPercent, myAmount, isFinalLoop, data.currentRound, oppMessage);
 
         ProposalUI.renderNextRoundAction(
             myAmount,

@@ -97,7 +97,7 @@ const ProposalController = {
                 gapStatus = bothViewed ? 'analyzed' : 'ready';
                 roundStatus = bothViewed ? 'completed' : 'ready';
                 gapData = { diff, round: currentRound };
-                currentRoundData = { round: currentRound, partyAAmount: amt1, partyBAmount: amt2, diff, completed: true, bothViewed };
+                currentRoundData = { round: currentRound, partyAAmount: amt1, partyBAmount: amt2, diff, completed: true, bothViewed, partyAMessage: pPartyACurrent.message, partyBMessage: pPartyBCurrent.message };
 
                 const maxVal = Math.max(amt1, amt2);
                 const gapPercent = (diff / maxVal) * 100;
@@ -132,7 +132,7 @@ const ProposalController = {
                 const pA = allProposals.find(p => p.proposerId == room.partyAId && p.round == r);
                 const pB = allProposals.find(p => p.proposerId == room.partyBId && p.round == r);
                 if (pA && pB) {
-                    previousRounds.push({ round: r, partyAAmount: pA.amount, partyBAmount: pB.amount, completed: true, resultViewed: pA.resultViewed && pB.resultViewed });
+                    previousRounds.push({ round: r, partyAAmount: pA.amount, partyBAmount: pB.amount, completed: true, resultViewed: pA.resultViewed && pB.resultViewed, partyAMessage: pA.message, partyBMessage: pB.message });
                 } else {
                     previousRounds.push({ round: r, completed: false, expired: true });
                 }
@@ -142,6 +142,7 @@ const ProposalController = {
                 success: true,
                 myProposalCount: myProposals.length,
                 myLastProposal: myProposals.length > 0 ? myProposals[0] : null,
+                myProposals,
                 opponentProposalCount: opponentProposals.length,
                 hasOpponentProposed: oppRound === currentRound,
                 opponentLastProposal: opponentProposals.length > 0 ? { expiresAt: opponentProposals[0].expiresAt, createdAt: opponentProposals[0].createdAt } : null,
@@ -154,7 +155,8 @@ const ProposalController = {
                 data: gapData,
                 currentRoundData,
                 previousRounds,
-                midpointStatus
+                midpointStatus,
+                isPartyA: (uid === room.partyAId)
             });
 
         } catch (e) {
@@ -165,7 +167,7 @@ const ProposalController = {
 
     // 2. Submit Proposal
     async submitProposal(req, res) {
-        let { userId, roomId, amount, duration, position } = req.body;
+        let { userId, roomId, amount, duration, position, message } = req.body;
         userId = parseInt(userId, 10);
         try {
             const room = await Room.findByPk(roomId);
@@ -202,7 +204,7 @@ const ProposalController = {
             else if (dur === 3) expiresAt.setDate(expiresAt.getDate() + 3);
             else expiresAt.setDate(expiresAt.getDate() + 1);
 
-            await Proposal.create({ roomId, proposerId: userId, amount, round: currentRound, position: position || 'payer', duration, expiresAt });
+            await Proposal.create({ roomId, proposerId: userId, amount, round: currentRound, position: position || 'payer', duration, expiresAt, message: message ? message.substring(0, 300) : null });
 
             if (room.status === 'connected' || room.status === 'pending') room.status = 'negotiating';
             if (userId === room.partyAId) room.nextRoundIntentPartyA = false;

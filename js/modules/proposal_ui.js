@@ -102,43 +102,46 @@ window.ProposalUI = {
     },
 
     // --- History Rendering ---
-    addToHistory(amount, resultText, color, round) {
-        const list = document.getElementById('historyList');
-        const emptyState = document.getElementById('emptyHistory');
-        if (emptyState) emptyState.style.display = 'none';
+    renderHistoryTable(data) {
+        const tbody = document.getElementById('historyTableBody');
+        if (!tbody) return;
 
-        if (!amount && !resultText) return;
-
-        if (list.firstChild && list.firstChild.innerHTML && list.firstChild.innerHTML.includes(resultText) && list.firstChild.innerHTML.includes(parseInt(amount).toLocaleString())) {
+        tbody.innerHTML = '';
+        if (!data.myProposals || data.myProposals.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #64748b;">이력이 없습니다.</td></tr>`;
             return;
         }
 
-        const li = document.createElement('li');
-        li.className = 'history-item';
-        li.style.animation = 'fade-in-up 0.5s ease forwards';
+        const sortedProposals = [...data.myProposals].sort((a, b) => b.round - a.round);
+        
+        sortedProposals.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+            
+            let statusText = '<span style="color: #f59e0b;">진행 중</span>';
+            if (p.round < data.currentRound) {
+                statusText = '<span style="color: #94a3b8;">종료</span>';
+            } else if (p.round === data.currentRound && data.currentRoundData && data.currentRoundData.completed) {
+                statusText = '<span style="color: #4ade80;">결과 공개</span>';
+            }
+            if (data.midpointStatus && data.midpointStatus.phase === 3 && p.round === data.currentRound) {
+                 statusText = '<span style="color: #4ade80;">합의 타결</span>';
+            }
 
-        li.innerHTML = `
-            <div class="round-badge">R${round || '-'}</div>
-            <div class="history-content">
-                <div class="history-amount">${parseInt(amount).toLocaleString()}만원</div>
-                <div class="history-date">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-            </div>
-            <div class="history-result" style="color: ${color || '#fff'}">
-                ${resultText}
-            </div>
-        `;
-        list.insertBefore(li, list.firstChild);
-    },
-
-    clearHistory() {
-        const list = document.getElementById('historyList');
-        if (list) list.innerHTML = '';
-        const emptyState = document.getElementById('emptyHistory');
-        if (emptyState) emptyState.style.display = 'block';
+            const msgText = p.message ? p.message : '<span style="color: #64748b;">(없음)</span>';
+            
+            tr.innerHTML = `
+                <td style="padding: 12px 10px;">${p.round}</td>
+                <td style="padding: 12px 10px; font-weight: bold; color: #fff;">${p.amount.toLocaleString()}원</td>
+                <td style="padding: 12px 10px; color: #cbd5e1; font-size: 0.85rem; white-space: pre-wrap; word-break: break-all;">${msgText}</td>
+                <td style="padding: 12px 10px;">${statusText}</td>
+            `;
+            tbody.appendChild(tr);
+        });
     },
 
     // --- Gauge & Result Chart ---
-    renderGaugeChart(gapPercent, myAmount, isFinalRound = false, currentRound = 1) {
+    renderGaugeChart(gapPercent, myAmount, isFinalRound = false, currentRound = 1, oppMessage = null) {
         this.showRightPanelState('resultState');
 
         const rangeBox = document.querySelector('#rangeHintBox div:last-child');
@@ -208,6 +211,39 @@ window.ProposalUI = {
             adviceDiv.innerHTML = advice;
             adviceDiv.style.borderLeftColor = color; 
             adviceDiv.style.background = color + '15'; 
+        }
+
+        // Render Opponent Message
+        let oppMessageContainer = document.getElementById('oppMessageContainer');
+        if (!oppMessageContainer) {
+            const parent = document.getElementById('resultState');
+            if (parent) {
+                oppMessageContainer = document.createElement('div');
+                oppMessageContainer.id = 'oppMessageContainer';
+                oppMessageContainer.style.marginTop = '25px';
+                oppMessageContainer.style.marginBottom = '25px';
+                const nextAction = document.getElementById('nextRoundActionArea');
+                if (nextAction) {
+                    parent.insertBefore(oppMessageContainer, nextAction);
+                } else {
+                    parent.appendChild(oppMessageContainer);
+                }
+            }
+        }
+        if (oppMessageContainer) {
+            if (oppMessage && oppMessage.trim() !== '') {
+                oppMessageContainer.innerHTML = `
+                    <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 20px; border-radius: 12px; text-align: left; position: relative;">
+                        <h4 style="color: #60a5fa; margin-bottom: 10px; font-size: 0.95rem;">
+                            <i class="fas fa-comment-dots" style="margin-right: 5px;"></i> 상대방의 제안 메시지
+                        </h4>
+                        <div style="color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; font-style: italic;">"${oppMessage}"</div>
+                    </div>
+                `;
+                oppMessageContainer.style.display = 'block';
+            } else {
+                oppMessageContainer.style.display = 'none';
+            }
         }
 
         if (gapPercent <= 10) {

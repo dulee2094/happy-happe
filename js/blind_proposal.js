@@ -89,6 +89,9 @@ window.submitProposal = async () => {
         return;
     }
 
+    const messageInput = document.getElementById('myMessage');
+    const message = messageInput ? messageInput.value.trim() : null;
+
     const roomId = localStorage.getItem('current_room_id');
     const userId = localStorage.getItem('user_id');
 
@@ -114,11 +117,16 @@ window.submitProposal = async () => {
     }
 
     try {
-        // FIXED: ProposalAPI.submitProposal expects { caseId, userId, amount, duration }
-        const result = await ProposalAPI.submitProposal({ roomId, userId, amount, duration: durationDays });
+        // FIXED: ProposalAPI.submitProposal expects { roomId, userId, amount, duration, message }
+        const result = await ProposalAPI.submitProposal({ roomId, userId, amount, duration: durationDays, message });
         if (result.success) {
             // alert('제안이 성공적으로 등록되었습니다.');
             amountInput.value = '';
+            if (messageInput) {
+                messageInput.value = '';
+                const charCount = document.getElementById('messageCharCount');
+                if (charCount) charCount.innerText = '0 / 300 자';
+            }
 
             // Force immediate update
             await checkStatus();
@@ -364,6 +372,23 @@ async function checkStatus() {
                     banner.style.display = 'none';
                 }
             }
+
+            const navAgreementBtn = document.getElementById('navAgreementBtn');
+            const navAgreementLock = document.getElementById('navAgreementLock');
+            if (navAgreementBtn && navAgreementLock) {
+                if (data.status === 'settled') {
+                    navAgreementBtn.style.opacity = '1';
+                    navAgreementBtn.style.cursor = 'pointer';
+                    navAgreementBtn.classList.remove('locked');
+                    navAgreementLock.style.display = 'none';
+                    if (data.finalAmount) localStorage.setItem('current_final_amount', data.finalAmount);
+                } else {
+                    navAgreementBtn.style.opacity = '0.6';
+                    navAgreementBtn.style.cursor = 'pointer';
+                    navAgreementBtn.classList.add('locked');
+                    navAgreementLock.style.display = 'inline-block';
+                }
+            }
         }
 
         // DEBUG
@@ -376,6 +401,15 @@ async function checkStatus() {
 
 
 // --- Initialization ---
+
+window.goToAgreementPage = function() {
+    const navAgreementBtn = document.getElementById('navAgreementBtn');
+    if (navAgreementBtn && navAgreementBtn.classList.contains('locked')) {
+        alert('합의가 최종 타결된 이후에 결과 문서(조율 확인서)를 발급받을 수 있습니다.');
+        return;
+    }
+    window.location.href = 'agreement.html';
+};
 
 window.goToInvitePage = function() {
     const roomId = localStorage.getItem('current_room_id');
