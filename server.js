@@ -50,6 +50,10 @@ try {
 loadRoute('./routes/proposal', 'proposal');
 loadRoute('./routes/room', 'room');
 
+// Admin and Visit routes
+loadRoute('./routes/admin', 'admin');
+loadRoute('./routes/visit', 'visit');
+
 // Health Check Endpoint
 app.get('/health', (req, res) => {
     res.status(200).json({

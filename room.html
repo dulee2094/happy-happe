@@ -66,6 +66,14 @@
                     <span>블라인드 제안 중</span>
                 </div>
 
+                <div class="nav-item" onclick="goToInvitePage()"
+                    style="margin-bottom: 10px; cursor: pointer; color: #94a3b8; background: rgba(255,255,255,0.03); transition: all 0.2s;"
+                    onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='white'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.color='#94a3b8'">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <span>초대하기</span>
+                </div>
+
                 <div class="nav-item" onclick="window.ProposalUI.showGuide()"
                     style="margin-bottom: 30px; cursor: pointer; color: #94a3b8; background: rgba(255,255,255,0.03); transition: all 0.2s;"
                     onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='white'"
@@ -74,7 +82,7 @@
                     <span>이용 가이드</span>
                 </div>
 
-                <div class="nav-item" onclick="location.href='dashboard.html'"
+                <div class="nav-item" onclick="location.href='dashboard.html?page=cases'"
                     style="cursor: pointer; opacity: 0.8; transition: opacity 0.3s;">
                     <i class="fas fa-arrow-left"></i>
                     <span>방 목록으로 복귀</span>
@@ -98,16 +106,7 @@
                 </div>
             </div>
 
-            <!-- Invite Banner (Hidden by default) -->
-            <div id="inviteBanner" style="display: none; background: rgba(74, 158, 255, 0.1); border: 1px solid rgba(74, 158, 255, 0.3); padding: 15px 20px; border-radius: 12px; margin-bottom: 25px; align-items: center; justify-content: space-between;">
-                <div>
-                    <h4 style="color: #4A9EFF; margin: 0 0 5px 0;"><i class="fas fa-user-plus"></i> 상대방이 아직 입장하지 않았습니다</h4>
-                    <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">조율을 시작하려면 먼저 초대를 진행해주세요.</p>
-                </div>
-                <button class="btn btn-primary" onclick="goToInvitePage()" style="background: linear-gradient(135deg, #4A9EFF, #3b82f6); box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3); border: none; padding: 10px 20px; border-radius: 8px; white-space: nowrap;">
-                    초대장 생성하기
-                </button>
-            </div>
+            <!-- Invite Banner moved to Sidebar -->
 
             <!-- Blind Proposal Section -->
             <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr;">

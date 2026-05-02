@@ -201,6 +201,39 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'room.html';
     };
 
+    window.leaveRoom = async function(roomId, status, isCreator) {
+        let confirmMsg = '이 방을 내 목록에서 지우시겠습니까?';
+        
+        if (status === 'pending' && isCreator) {
+            confirmMsg = '상대방이 아직 입장하지 않았습니다. 이 방을 완전히 삭제하시겠습니까? (복구 불가)';
+        } else if (status === 'negotiating' || status === 'connected') {
+            confirmMsg = '진행 중인 협상입니다. 정말 협상을 포기하고 나가시겠습니까? (상대방에게 종료 알림이 전송됩니다)';
+        } else if (status === 'settled' || status === 'expired') {
+            confirmMsg = '종료된 협상입니다. 목록에서 지우시겠습니까?';
+        }
+
+        if (!confirm(confirmMsg)) return;
+
+        const userId = localStorage.getItem('user_id');
+        try {
+            const res = await fetch(`${API_BASE}/room/leave`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId, roomId })
+            });
+            const data = await res.json();
+            
+            if (data.success) {
+                window.showToast(data.message || '방이 삭제/숨김 처리되었습니다.');
+                if (window.fetchAllCases) window.fetchAllCases();
+            } else {
+                alert('처리 실패: ' + data.error);
+            }
+        } catch (e) {
+            alert('오류가 발생했습니다: ' + e.message);
+        }
+    };
+
     window.logout = function () {
         if (confirm('로그아웃 하시겠습니까?')) {
             localStorage.clear();
