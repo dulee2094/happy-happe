@@ -166,32 +166,40 @@ window.ProposalUI = {
         const adviceHeader = Array.from(document.querySelectorAll('h4')).find(el => el.textContent.includes('AI 조언'));
         const adviceDiv = adviceHeader ? adviceHeader.nextElementSibling : null;
 
-        let color, title, desc, width, badgeText, advice;
+        let color, title, desc, width, badgeText, advice, imgSrc, imgBorderColor;
 
         if (gapPercent <= 10) {
             color = '#4ade80';
-            title = "🎉 축하합니다! 의견이 거의 일치합니다.";
+            title = "축하합니다! 의견이 거의 일치합니다.";
             desc = "제안하신 금액과 상대방의 희망 금액 차이가 <strong>10% 이내</strong>입니다.<br>합의가 눈앞에 있습니다!";
             width = '98%'; badgeText = "유사 일치";
             advice = "격차가 매우 좁혀졌습니다. <strong>[중간점 조율]</strong>을 통해 즉시 타결하는 것을 강력히 추천합니다.";
+            imgSrc = 'images/mediator_success.png';
+            imgBorderColor = 'rgba(74, 222, 128, 0.4)';
         } else if (gapPercent <= 30) {
             color = '#3b82f6';
-            title = "🤝 긍정적인 조율 단계입니다.";
+            title = "긍정적인 조율 단계입니다.";
             desc = "의견 차이가 크지 않습니다.<br>조금만 더 조율하면 합의점을 찾을 수 있습니다.";
             width = '75%'; badgeText = "조율 가능";
             advice = "상대방과 긍정적인 범위 내에서 조율이 진행 중입니다. 다음 라운드에서 조금 더 유연한 제안을 해보세요.";
+            imgSrc = 'images/mediator_analysis_complete.png';
+            imgBorderColor = 'rgba(59, 130, 246, 0.4)';
         } else if (gapPercent <= 60) {
             color = '#facc15';
-            title = "🤔 시각의 차이가 존재합니다.";
+            title = "시각의 차이가 존재합니다.";
             desc = "희망 금액의 차이가 다소 큽니다.<br>서로의 입장을 다시 한번 고려해보세요.";
             width = '50%'; badgeText = "차이 발생";
             advice = "격차를 줄이기 위해 전략적인 양보가 필요할 수 있습니다. 감정적인 대응보다 합리적인 접근이 필요합니다.";
+            imgSrc = 'images/mediator_gap_large.png';
+            imgBorderColor = 'rgba(250, 204, 21, 0.4)';
         } else {
             color = '#ef4444';
-            title = "⚠️ 입장 차이가 매우 큽니다.";
+            title = "입장 차이가 매우 큽니다.";
             desc = "상대방과 금액에 대한 기대치가 많이 다릅니다.<br>현실적인 대안을 고민해야 합니다.";
             width = '25%'; badgeText = "큰 격차";
             advice = "현재 격차가 매우 큽니다. 무리한 설득보다는 상대방의 상황을 이해하려는 노력이 선행되어야 합니다.";
+            imgSrc = 'images/mediator_gap_large.png';
+            imgBorderColor = 'rgba(239, 68, 68, 0.4)';
         }
 
         if (gapTitle) gapTitle.innerHTML = title;
@@ -211,6 +219,13 @@ window.ProposalUI = {
             adviceDiv.innerHTML = advice;
             adviceDiv.style.borderLeftColor = color; 
             adviceDiv.style.background = color + '15'; 
+        }
+
+        // Apply image source
+        const resultImg = document.getElementById('resultCharacterImg');
+        if (resultImg) {
+            resultImg.src = imgSrc;
+            resultImg.style.borderColor = imgBorderColor;
         }
 
         // Render Opponent Message

@@ -260,9 +260,7 @@
 
                     <!-- Priority 4.5: Analysis Confirmation (Two-Step Verification) -->
                     <div id="analysisReadyState" style="display: none; width: 100%; animation: fade-in 0.5s ease-out;">
-                        <div style="font-size: 4rem; margin-bottom: 20px; animation: bounce-icon 2s infinite;">
-                            🎉
-                        </div>
+                        <img src="images/mediator_analysis_complete.png" alt="분석 완료" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px auto; display: block; border: 4px solid rgba(59, 130, 246, 0.4); box-shadow: 0 10px 25px rgba(0,0,0,0.3); animation: fade-in 1s ease-out;">
                         <h3 style="color: #fff; margin-bottom: 15px;">분석 완료!</h3>
                         <p style="color: #cbd5e1; line-height: 1.6; margin-bottom: 30px;">
                             양측의 제안이 모두 등록되어<br>
@@ -280,6 +278,8 @@
 
                     <!-- Priority 5: Result Analysis State (Graph) -->
                     <div id="resultState" style="display: none; width: 100%; animation: fade-in 0.5s ease-out;">
+                        <img id="resultCharacterImg" src="images/mediator_gap_large.png" alt="결과 분석" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px auto; display: block; border: 4px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 25px rgba(0,0,0,0.3); animation: fade-in 1s ease-out;">
+
                         <!-- Round End Badge -->
                         <div id="roundEndBadge"
                             style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 15px; border: 1px solid rgba(239, 68, 68, 0.3);">
