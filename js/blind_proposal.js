@@ -376,12 +376,27 @@ async function checkStatus() {
             const navAgreementBtn = document.getElementById('navAgreementBtn');
             const navAgreementLock = document.getElementById('navAgreementLock');
             if (navAgreementBtn && navAgreementLock) {
-                if (data.status === 'settled') {
+                if (data.status === 'settled' || (data.midpointStatus && data.midpointStatus.phase === 3)) {
                     navAgreementBtn.style.opacity = '1';
                     navAgreementBtn.style.cursor = 'pointer';
                     navAgreementBtn.classList.remove('locked');
                     navAgreementLock.style.display = 'none';
                     if (data.finalAmount) localStorage.setItem('current_final_amount', data.finalAmount);
+                    else if (data.midpointStatus && data.midpointStatus.midpointAmount) localStorage.setItem('current_final_amount', data.midpointStatus.midpointAmount);
+                    
+                    const badge = document.getElementById('statusBadge');
+                    if (badge) {
+                        badge.textContent = "🟢 합의 타결";
+                        badge.style.color = "#4ade80";
+                        badge.style.background = "rgba(74, 222, 128, 0.1)";
+                        badge.style.border = "1px solid #4ade80";
+                    }
+
+                    const contextTitle = document.getElementById('sidebarContextTitle');
+                    if (contextTitle) {
+                        contextTitle.innerHTML = '<i class="fas fa-handshake" style="margin-right: 5px;"></i>합의 최종 타결 완료';
+                        contextTitle.style.color = '#4ade80';
+                    }
                 } else {
                     navAgreementBtn.style.opacity = '0.6';
                     navAgreementBtn.style.cursor = 'pointer';
@@ -405,10 +420,14 @@ async function checkStatus() {
 window.goToAgreementPage = function() {
     const navAgreementBtn = document.getElementById('navAgreementBtn');
     if (navAgreementBtn && navAgreementBtn.classList.contains('locked')) {
-        alert('합의가 최종 타결된 이후에 결과 문서(조율 확인서)를 발급받을 수 있습니다.');
+        alert('합의가 최종 타결된 이후에 결과 문서(조율 확인서)를 확인하실 수 있습니다.');
         return;
     }
-    window.location.href = 'agreement.html';
+    if (window.ProposalUI && typeof window.ProposalUI.showAgreementModal === 'function') {
+        window.ProposalUI.showAgreementModal();
+    } else {
+        alert('확인서 모듈을 불러올 수 없습니다.');
+    }
 };
 
 window.goToInvitePage = function() {

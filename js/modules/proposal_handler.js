@@ -574,7 +574,7 @@ window.ProposalHandler = {
                     </div>
                 </div>
                 
-                 <button onclick="goToAgreementPage()" class="btn btn-primary" style="margin-top: 30px; padding: 15px 40px; border-radius: 50px; background: #fff; color: #000; font-weight: bold;">
+                 <button onclick="ProposalUI.showAgreementModal()" class="btn btn-primary" style="margin-top: 30px; padding: 15px 40px; border-radius: 50px; background: #fff; color: #000; font-weight: bold;">
                     📄 협상결과 확인서 보기
                 </button>
             `;

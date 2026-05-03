@@ -15,7 +15,7 @@
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary), #2dd4bf);
     --gradient-logo: linear-gradient(135deg, #10b981, #3b82f6); /* HappE */
-    --gradient-logo-left: linear-gradient(135deg, #FFE81A, #FF7B00); /* Happy (망고 썬셋 오렌지) */
+    --gradient-logo-left: linear-gradient(135deg, #FFE81A 30%, #FFA000 100%); /* Happy (밝은 옐로우 오렌지) */
     --gradient-glow: radial-gradient(circle at center, var(--primary), transparent 70%);
 
     /* Spacing */
@@ -1114,14 +1114,29 @@ footer {
 }
 
 .process-card .icon-box {
-    font-size: 2rem;
-    color: var(--primary);
     margin-bottom: 20px;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
-.process-card.highlight-step .icon-box {
-    color: var(--secondary);
+.process-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-card:hover .process-icon {
+    transform: scale(1.05);
+}
+
+.process-card.highlight-step .process-icon {
+    border-color: var(--secondary);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
 }
 
 .process-card h3 {

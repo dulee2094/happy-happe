@@ -202,6 +202,83 @@ window.ProposalUI = {
         }
     },
 
+    // --- Agreement Modal ---
+    showAgreementModal() {
+        let modal = document.getElementById('agreementModal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'agreementModal';
+            modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:4000; display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition:all 0.3s ease; padding:20px; overflow-y:auto;';
+            
+            // Generate content
+            const topic = localStorage.getItem('current_room_topic') || '진행 중인 안건';
+            const opponent = localStorage.getItem('current_counterparty') || '상대방';
+            const myName = '본인'; // Or fetch from local storage if available
+            const amount = localStorage.getItem('current_final_amount') || '0';
+            
+            const today = new Date();
+            const dateString = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일 ${today.getHours()}시 ${today.getMinutes()}분`;
+
+            modal.innerHTML = `
+                <div style="background:#fff; border-radius:16px; padding:40px; max-width:500px; width:100%; box-shadow:0 25px 50px rgba(0,0,0,0.5); transform:translateY(20px); transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative; color:#1e293b; text-align:center;">
+                    
+                    <div style="position:absolute; top:20px; right:20px; cursor:pointer; color:#94a3b8; font-size:1.5rem;" onclick="ProposalUI.closeAgreementModal()">&times;</div>
+                    
+                    <h2 style="font-family:'Nanum Myeongjo', serif; font-size:2rem; margin-bottom:30px; color:#0f172a; border-bottom:2px solid #e2e8f0; padding-bottom:15px;">협 상 결 과 확 인 서</h2>
+                    
+                    <div style="text-align:left; margin-bottom:30px; font-size:1.05rem; line-height:1.8;">
+                        <p><strong>■ 안건명:</strong> ${topic}</p>
+                        <p><strong>■ 참여자:</strong> ${myName} & ${opponent}</p>
+                    </div>
+
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:25px; margin-bottom:30px;">
+                        <div style="font-size:1rem; color:#64748b; margin-bottom:10px;">최종 합의 금액</div>
+                        <div style="font-size:2.2rem; font-weight:800; color:#3b82f6;">금 ${parseInt(amount).toLocaleString()} 원</div>
+                    </div>
+
+                    <p style="font-size:0.95rem; color:#475569; line-height:1.6; margin-bottom:40px; word-break:keep-all;">
+                        위 당사자들은 본 안건에 관하여 해피합의 블라인드 조율 시스템을 통해 상호 동의하에 위 금액으로 원만히 합의가 성사되었음을 확인합니다.
+                    </p>
+
+                    <div style="text-align:center; font-size:1rem; color:#64748b; margin-bottom:40px;">
+                        <p>${dateString}</p>
+                        <div style="margin-top:15px; font-weight:bold; font-size:1.2rem; color:#0f172a;">
+                            해피합의(HappyHappE) 시스템 인증 <i class="fas fa-check-circle" style="color:#4ade80;"></i>
+                        </div>
+                    </div>
+
+                    <div style="background:rgba(59,130,246,0.1); padding:15px; border-radius:8px; margin-bottom:25px; text-align:left; font-size:0.9rem; color:#3b82f6;">
+                        <i class="fas fa-info-circle"></i> <strong>Next Step:</strong> 이제 상대방과 연락하여 합의된 금액을 안전하게 송금 및 수령하시기 바랍니다.
+                    </div>
+
+                    <div style="display:flex; gap:10px; justify-content:center;">
+                        <button onclick="window.print()" style="flex:1; background:#f1f5f9; color:#475569; border:1px solid #cbd5e1; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; transition:all 0.2s;">
+                            <i class="fas fa-print"></i> 인쇄 / PDF 저장
+                        </button>
+                        <button onclick="ProposalUI.closeAgreementModal()" style="flex:1; background:linear-gradient(135deg, #3b82f6, #2563eb); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(59,130,246,0.3);">
+                            확인 완료
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        // Show
+        modal.style.visibility = 'visible';
+        modal.style.opacity = '1';
+        modal.querySelector('div').style.transform = 'translateY(0)';
+    },
+
+    closeAgreementModal() {
+        const modal = document.getElementById('agreementModal');
+        if (modal) {
+            modal.style.opacity = '0';
+            modal.style.visibility = 'hidden';
+            modal.querySelector('div').style.transform = 'translateY(20px)';
+        }
+    },
+
     // --- Gauge & Result Chart ---
     renderGaugeChart(gapPercent, myAmount, isFinalRound = false, currentRound = 1, oppMessage = null) {
         this.showRightPanelState('resultState');
