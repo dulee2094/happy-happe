@@ -213,7 +213,7 @@ window.ProposalUI = {
             // Generate content
             const topic = localStorage.getItem('current_room_topic') || '진행 중인 안건';
             const opponent = localStorage.getItem('current_counterparty') || '상대방';
-            const myName = '본인'; // Or fetch from local storage if available
+            const myName = localStorage.getItem('user_name') || '본인';
             const amount = localStorage.getItem('current_final_amount') || '0';
             
             const today = new Date();
@@ -283,9 +283,25 @@ window.ProposalUI = {
     renderGaugeChart(gapPercent, myAmount, isFinalRound = false, currentRound = 1, oppMessage = null) {
         this.showRightPanelState('resultState');
 
+        let trafficLightText = '';
+        let trafficLightColor = '';
+        if (gapPercent <= 10) {
+            trafficLightText = '🟢 성사 임박';
+            trafficLightColor = '#4ade80';
+        } else if (gapPercent <= 30) {
+            trafficLightText = '🔵 긍정적 조율';
+            trafficLightColor = '#3b82f6';
+        } else if (gapPercent <= 60) {
+            trafficLightText = '🟡 차이 발생';
+            trafficLightColor = '#facc15';
+        } else {
+            trafficLightText = '🔴 큰 격차';
+            trafficLightColor = '#ef4444';
+        }
+
         const rangeBox = document.querySelector('#rangeHintBox div:last-child');
         if (rangeBox) {
-            rangeBox.innerHTML = `<div style="font-size:1.5rem; margin-bottom:5px;">${gapPercent}%</div> <span style="font-size:0.8rem; color:#facc15;">조율 근접 수치<br>(금액 비공개)</span>`;
+            rangeBox.innerHTML = `<div style="font-size:1.4rem; font-weight:bold; margin-bottom:5px; color:${trafficLightColor};">${trafficLightText}</div> <span style="font-size:0.8rem; color:#94a3b8;">AI 신호등 격차 분석<br>(금액 비공개)</span>`;
         }
 
         const myDisplay = document.getElementById('myCurrentDisplay');
@@ -305,7 +321,7 @@ window.ProposalUI = {
         const adviceHeader = Array.from(document.querySelectorAll('h4')).find(el => el.textContent.includes('AI 조언'));
         const adviceDiv = adviceHeader ? adviceHeader.nextElementSibling : null;
 
-        let color, title, desc, width, badgeText, advice, imgSrc, imgBorderColor;
+        let color, title, desc, width, badgeText, advice;
 
         if (gapPercent <= 10) {
             color = '#4ade80';
@@ -313,32 +329,24 @@ window.ProposalUI = {
             desc = "제안하신 금액과 상대방의 희망 금액 차이가 <strong>10% 이내</strong>입니다.<br>합의가 눈앞에 있습니다!";
             width = '98%'; badgeText = "유사 일치";
             advice = "격차가 매우 좁혀졌습니다. <strong>[중간점 조율]</strong>을 통해 즉시 타결하는 것을 강력히 추천합니다.";
-            imgSrc = 'images/room_success.png';
-            imgBorderColor = 'rgba(74, 222, 128, 0.4)';
         } else if (gapPercent <= 30) {
             color = '#3b82f6';
             title = "긍정적인 조율 단계입니다.";
             desc = "의견 차이가 크지 않습니다.<br>조금만 더 조율하면 합의점을 찾을 수 있습니다.";
             width = '75%'; badgeText = "조율 가능";
             advice = "상대방과 긍정적인 범위 내에서 조율이 진행 중입니다. 다음 라운드에서 조금 더 유연한 제안을 해보세요.";
-            imgSrc = 'images/room_gap_detected.png';
-            imgBorderColor = 'rgba(59, 130, 246, 0.4)';
         } else if (gapPercent <= 60) {
             color = '#facc15';
             title = "시각의 차이가 존재합니다.";
             desc = "희망 금액의 차이가 다소 큽니다.<br>서로의 입장을 다시 한번 고려해보세요.";
             width = '50%'; badgeText = "차이 발생";
             advice = "격차를 줄이기 위해 전략적인 양보가 필요할 수 있습니다. 감정적인 대응보다 합리적인 접근이 필요합니다.";
-            imgSrc = 'images/room_gap_detected.png';
-            imgBorderColor = 'rgba(250, 204, 21, 0.4)';
         } else {
             color = '#ef4444';
             title = "입장 차이가 매우 큽니다.";
             desc = "상대방과 금액에 대한 기대치가 많이 다릅니다.<br>현실적인 대안을 고민해야 합니다.";
             width = '25%'; badgeText = "큰 격차";
             advice = "현재 격차가 매우 큽니다. 무리한 설득보다는 상대방의 상황을 이해하려는 노력이 선행되어야 합니다.";
-            imgSrc = 'images/room_gap_detected.png';
-            imgBorderColor = 'rgba(239, 68, 68, 0.4)';
         }
 
         if (gapTitle) gapTitle.innerHTML = title;
@@ -358,13 +366,6 @@ window.ProposalUI = {
             adviceDiv.innerHTML = advice;
             adviceDiv.style.borderLeftColor = color; 
             adviceDiv.style.background = color + '15'; 
-        }
-
-        // Apply image source
-        const resultImg = document.getElementById('resultCharacterImg');
-        if (resultImg) {
-            resultImg.src = imgSrc;
-            resultImg.style.borderColor = imgBorderColor;
         }
 
         // Render Opponent Message
