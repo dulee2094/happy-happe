@@ -106,9 +106,7 @@ window.submitProposal = async () => {
         if (data.success) {
             // Check for Analysis Result (Regression Fix Support)
             if (data.status === 'analyzed') {
-                // If we are in the main Page proposal modal (not blind_proposal.html), we might want to show result.
-                // But simply alerting for now or refreshing is default behavior in case_detail.js
-                alert(`제안이 등록되었습니다.\n\n[분석 결과]\n상대방과의 금액 차이: ${data.data.diff.toLocaleString()}원`);
+                alert('제안이 등록되었습니다.\n양측 제안이 모두 입력되어 분석이 완료되었습니다. 협상 진행 화면에서 결과를 확인해 주세요.');
             } else {
                 alert('제안이 성공적으로 등록되었습니다.');
             }
